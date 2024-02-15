@@ -1,0 +1,52 @@
+html {
+	height: 100%;
+	font-size: 62.5%;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	background: #FFF;
+	color: $text-color;
+	@include fs(18);
+	font-family: 'Roboto', sans-serif;
+}
+
+.os-animation {
+    opacity: 0;
+}
+
+.os-animation.animated {
+    opacity: 1;
+}
+
+/****************/
+/*    HELPERS   */
+/****************/
+
+a {
+	@include transition(all 0.3s ease);
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: none;
+	}
+
+	&:focus {
+		outline: none;
+		text-decoration: none;
+	}
+}
+
+.center {
+	text-align: center;
+}
+
+.row {
+	max-width: 100%;
+	@include clearfix;
+	margin: 0;
+}
+
+.clear {
+	@include clearfix;
+}

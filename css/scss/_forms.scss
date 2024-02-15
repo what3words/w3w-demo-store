@@ -1,0 +1,152 @@
+::-webkit-input-placeholder {
+  color: #aeaeae;
+  @include fs(15);
+  font-weight: 300;
+}
+
+:-moz-placeholder {
+  color: #aeaeae;
+  @include fs(15);
+  font-weight: 300;
+}
+
+::-moz-placeholder {
+  color: #aeaeae;
+  @include fs(15);
+  font-weight: 300;
+}
+
+:-ms-input-placeholder {
+  color: #aeaeae;
+  @include fs(15);
+  font-weight: 300;
+}
+
+label {
+  display: block;
+  min-height: 30px;
+  line-height: 1.5;
+  @include clearfix;
+
+  @include dw(6) {
+    @include fs(14);
+  }
+}
+
+.error {
+  color: $red !important;
+  font-size: 13px;
+  padding: 3px 0;
+}
+
+div.form-element {
+  width: 100%;
+  padding: 0px;
+}
+
+textarea {
+  background: $light-gray;
+  border: none;
+  padding: 12px;
+  width: calc(100% - 4px);
+  @include box-sizing(border-box);
+  @include fs(13);
+  color: $text-color;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  outline: none;
+  border: 1px solid transparent;
+
+  &.multi {
+    margin-bottom: 10px;
+  }
+
+  &.error {
+    border: 1px solid $red;
+  }
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="search"],
+select {
+  background: $light-gray;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  @include box-sizing(border-box);
+  @include fs(13);
+  color: $text-color;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  outline: none;
+  border: 1px solid transparent;
+
+  &.multi {
+    margin-bottom: 10px;
+  }
+
+  &.error {
+    border: 1px solid $red;
+  }
+}
+
+button {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  outline: none;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  float: left;
+  margin: 5px 10px 0 0;
+}
+
+.form-row {
+  width: 48.5%;
+  float: left;
+  margin: 2rem 0 1rem;
+
+  @include dw(6) {
+    width: 100%;
+    float: none;
+  }
+
+  &.wide {
+    width: 100%;
+    float: none;
+    clear: both;
+  }
+
+  &.first {
+    clear: left;
+  }
+
+  &.last {
+    margin-left: 3%;
+
+    @include dw(6) {
+      margin-left: 0;
+    }
+  }
+}
+
+#checkout-what-3-words {
+  label {
+    padding-top: 1rem;
+  }
+}
