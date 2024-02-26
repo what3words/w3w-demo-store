@@ -838,7 +838,7 @@ textarea {
   background: #f5f5f5;
   border: none;
   padding: 12px;
-  width: calc(100% - 4px);
+  width: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -1104,7 +1104,7 @@ a:focus {
   content: "";
   display: block;
   left: calc(50% - 20px);
-  bottom: -13px;
+  bottom: -18px;
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
@@ -1213,7 +1213,7 @@ div.form-element {
 */
 div#suggestions {
   border: 1px solid #000;
-  width: calc(100% - 8px);
+  width: calc(100% - 10px);
   padding: 4px;
 }
 

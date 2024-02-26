@@ -7,7 +7,6 @@
         <title>w3w - Checkout</title>
         <link rel="icon" type="image/png" href="images/icons/favicon.png">
         <link rel="stylesheet" type="text/css" href="css/styles.css"> 
-        <link rel="stylesheet" href="css/jquery.w3w-autosuggest-plugin.bundle.min.css">
         <script
         type="module"
         async
@@ -22,15 +21,8 @@
         window.w3w = { callback: "main", key: "YF0C5HNE" };
         </script>
     </head>
-
     <body class="w3w-checkout" data-new-gr-c-s-check-loaded="8.910.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="8.910.0">
-        
-        <script type="text/javascript">
-            const ip_based_latlng = {"latitude":51.5412,"longitude":-0.2477,"country_code":"GB"};
-            console.log(ip_based_latlng);
-        </script>
-
-        <div id="geoloc"></div>
+    
         <div class="wrapper">
 
         <form id="checkout-form" name="checkout" method="post" class="w3w-checkout_form" novalidate="novalidate" action="post-checkout.php">
@@ -333,38 +325,10 @@
                     <label for="checkout_phone" class="">Phone</label>
                     <input type="tel" class="input-text " name="checkout_phone" id="checkout_phone" placeholder="" value="">
                 </p>
-                <div class="form-row wide" id="checkout-what-3-words">
-                <label for="checkout_w3w" class="">
-                    what3words
-                    <span class="tooltip">
-                    <img class="icon" src="images/icons/help.svg" alt="What is This?">
-                    <div class="content top">
-                        <div class="inner">
-                            what3words addresses help our delivery partners find you first time. Find yours at <a href="http://delivery.w3w.co" target="_blank">what3words.com</a>
-                        </div>
-                    </div>
-                    </span>
-                </label>
-                <what3words-autosuggest api_key="YF0C5HNE" variant="inherit">
-                    <input 
-                    class=""
-                    name="checkout_w3w"
-                    type="text"
-                    placeholder="e.g. lock.spout.radar" 
-                    optional
-                    />
-                </what3words-autosuggest>
-                </div>
-                <div class="create-account form-row wide">
-                    <p class="form-row form-row wide validate-required" id="account_password_field">
-                        <input type="checkbox" name="account_password" id="account_password" value="">
-                        <label for="account_password" class="">Create an account?</label>
-                    </p>
-                </div>
                 <div id="form_elem" class="form-element order-notes form-row wide">
                     <p class="form-row wide" id="checkout-note">
-                        <label for="delivery_options" class="">Delivery Notes e.g. Your what3words address</label>
-                        <textarea id="w3w" name="delivery_options" rows="5" placeholder="e.g. ///filled.count.soap"></textarea>
+                        <label for="delivery_options" class="">Delivery Notes (e.g. what3words address)</label>
+                        <textarea id="w3w" name="delivery_options" rows="5" placeholder="e.g. ///lock.spout.radar"></textarea>
                         <div id="suggestions"></div>
                     </p>
                 </div>
@@ -442,12 +406,6 @@
             </div>
         </form>
         </div>
-
     </body> 
-    
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/vendor/jquery.w3w-autosuggest-plugin.bundle.min.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/autosuggest-notes.js"></script>
-
 </html>

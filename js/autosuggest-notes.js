@@ -1,16 +1,20 @@
-const regex = /(?:\/\/\/|(?:http(?:s)?:\/\/)?(?:www\.)?(?:what3words|w3w)?\.\D+\/)?(\/{0,}(?:[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+|[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+([\u0020\u00A0][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+){1,3}[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+([\u0020\u00A0][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+){1,3}[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+([\u0020\u00A0][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+){1,3}))/gim;
+const regex =
+  /(?:\/\/\/|(?:http(?:s)?:\/\/)?(?:www\.)?(?:what3words|w3w)?\.\D+\/)?(\/{0,}(?:[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+|[^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+([\u0020\u00A0][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+){1,3}[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+([\u0020\u00A0][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+){1,3}[.｡。･・︒។։။۔።।][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+([\u0020\u00A0][^0-9`~!@#$%^&*()+\-_=[{\]}\\|'<,.>?/";:£§º©®\s]+){1,3}))/gim;
 const formElement = document.querySelector("#form_elem");
 const textarea = document.querySelector("#w3w");
 const suggestionDialog = document.querySelector("#suggestions");
-let position = {};
+// let position = {};
+
+
+
 
 function main(sdk) {
   if (!textarea) return;
-  watchLocation();
+  // window.onload = function () {
+  //   getCurrentPosition();
+  // }
 
-  textarea.addEventListener("blur", () =>
-    setTimeout(() => clearDialog(), 100)
-  );
+  textarea.addEventListener("blur", () => setTimeout(() => clearDialog(), 100));
   textarea.addEventListener("click", () => {
     clearDialog();
     getSuggestions().then(appendSuggestions);
@@ -32,7 +36,7 @@ function main(sdk) {
 
     if (word) {
       return sdk.api
-        .autosuggest({ input: word, ...position })
+        .autosuggest({ input: word, clipToCountry:['GB']  })
         .then(({ suggestions }) => suggestions);
     }
 
@@ -56,10 +60,7 @@ function main(sdk) {
       const word = findWordAtCursorPos();
 
       if (word) {
-        const newVal = textarea.value.replace(
-          word,
-          `///${suggestion.words}`
-        );
+        const newVal = textarea.value.replace(word, `///${suggestion.words}`);
         const newPos =
           textarea.value.indexOf(word) + ("///" + suggestion.words).length;
         textarea.value = newVal;
@@ -104,20 +105,22 @@ function main(sdk) {
       const matches = textarea.value.match(regex);
       suggestionDialog.innerHTML = `what3words ${
         matches.length > 1 ? "addresses" : "address"
-      } detected. Click on ${
-        matches.length > 1 ? "them" : "it"
-      } to validate`;
+      } detected. Click on ${matches.length > 1 ? "them" : "it"} to validate`;
     }
   }
 
-  function watchLocation() {
-    navigator.geolocation.watchPosition(({ coords }) => {
-      position = {
-        focus: {
-          lat: coords.latitude,
-          lng: coords.longitude
-        }
-      };
-    });
-  }
+  // function getCurrentPosition() {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(({ coords }) => {
+  //       position = {
+  //         focus: {
+  //           lat: coords.latitude,
+  //           lng: coords.longitude,
+  //         },
+  //       };
+  //     });
+  //   } else {
+  //     console.log("Geolocation is not supported by this browser.");
+  //   }
+  // }
 }
