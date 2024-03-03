@@ -1212,9 +1212,25 @@ div.form-element {
 * Add the what3words suggestions dropdown
 */
 div#suggestions {
-  border: 1px solid #000;
-  width: calc(100% - 10px);
+  /* border: 1px solid #000; */
+  width: 73%;
   padding: 4px;
+  margin-top: 0px;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  color: #0a3049;
+  font-size: 14px;
+  padding: 4px;
+  position: absolute;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.2));
+  border-bottom: 1px solid #7a7a7a;
+  z-index: 500;
 }
 
 div#suggestions:empty {
@@ -1222,27 +1238,70 @@ div#suggestions:empty {
 }
 
 div#suggestions > div {
-  padding: 4px;
-}
-
-div#suggestions > div:hover {
-  background-color: #f5f5f5;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  padding: 12px;
+  background: #fff;
+  -webkit-box-shadow: inset 0px -1px 0px #f2f4f5;
+  box-shadow: inset 0px -1px 0px #f2f4f5;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
   cursor: pointer;
 }
 
-div#suggestions > div:not(:last-of-type) {
-  border-bottom: 1px solid #000;
+what3words-symbol {
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 23px;
 }
 
-div#suggestions > div > div:first-of-type {
+div#suggestions > div > div {
+  pointer-events: none;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0px;
+  position: static;
+  height: 22px;
+  left: 0px;
+  top: 0px;
+  -ms-flex: none;
+  flex: none;
+  -ms-flex-order: 0;
+  order: 0;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 22px;
+  color: #0a3049;
 }
 
-div#suggestions > div > div:last-of-type {
-  display: flex;
-  justify-content: space-between;
-  padding-left: 14px;
-  font-size: 10pt;
+div#suggestions > div > div:hover {
+  background: #fff;
+  -webkit-box-shadow: inset 0px 5000px 0px rgba(0, 83, 121, 0.08);
+  box-shadow: inset 0px 5000px 0px rgba(0, 83, 121, 0.08);
+  -webkit-transition: -webkit-filter 100ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  transition: -webkit-filter 100ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  transition: filter 100ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  transition: filter 100ms cubic-bezier(0.455, 0.03, 0.515, 0.955), -webkit-filter 100ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
 .wrapper {
