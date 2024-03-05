@@ -4,6 +4,7 @@ const formElement = document.querySelector("#form_elem");
 const textarea = document.querySelector("#w3w");
 const suggestionDialog = document.querySelector("#suggestions");
 // let position = {};
+let position = {focus: {lat: ip_based_latlng.latitude,lng: ip_based_latlng.longitude}};
 
 
 
@@ -36,7 +37,7 @@ function main(sdk) {
 
     if (word) {
       return sdk.api
-        .autosuggest({ input: word, clipToCountry:['GB']  })
+        .autosuggest({ input: word, clipToCountry:['GB'], ...position })
         .then(({ suggestions }) => suggestions);
     }
 
@@ -46,12 +47,14 @@ function main(sdk) {
   function createDiv(suggestion) {
     const div = document.createElement("div");
     const words = document.createElement("div");
+    words.classList.add("words");
     const nearestPlace = document.createElement("div");
+    nearestPlace.classList.add("nearestPlace");
 
     words.innerHTML = `<what3words-symbol size="16"></what3words-symbol><b>${suggestion.words}</b>`;
     nearestPlace.innerHTML = `<small>near ${suggestion.nearestPlace}</small>`;
     if (suggestion.distanceToFocusKm) {
-      nearestPlace.innerHTML += `<span><small>${suggestion.distanceToFocusKm}km</small></span>`;
+      nearestPlace.innerHTML += `<span><small><b>${suggestion.distanceToFocusKm}km</b></small></span>`;
     }
 
     div.appendChild(words);

@@ -19,12 +19,12 @@
 
 <body class="w3w-checkout" data-new-gr-c-s-check-loaded="8.910.0" data-gr-ext-installed=""
     data-new-gr-c-s-loaded="8.910.0">
-    <!-- <script type="text/javascript">
-            const ip_based_latlng = {"latitude":51.5412,"longitude":-0.2477,"country_code":"GB"};
-            console.log(ip_based_latlng);
-        </script>
+    <script type="text/javascript">
+        const ip_based_latlng = { "latitude": 51.5412, "longitude": -0.2477, "country_code": "GB" };
+        console.log(ip_based_latlng);
+    </script>
 
-        <div id="geoloc"></div> -->
+    <div id="geoloc"></div>
     <div class="wrapper">
 
         <form id="checkout-form" name="checkout" method="post" class="w3w-checkout_form" novalidate="novalidate"
@@ -351,7 +351,7 @@
                             </div>
                         </span>
                     </label>
-                    <what3words-autosuggest api_key="YF0C5HNE" variant="inherit" clip_to_country="GB">
+                    <what3words-autosuggest api_key="YF0C5HNE" variant="inherit" clip_to_country="GB" autosuggest_focus="51.5412,-0.2477">
                         <input class="" name="checkout_w3w" type="text" placeholder="e.g. ///lock.spout.radar"
                             optional />
                     </what3words-autosuggest>

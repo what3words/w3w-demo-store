@@ -458,7 +458,7 @@ template {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  z-index: 100;
+  /* z-index: 100; */
 }
 .span.alpha {
   padding-left: 0;
@@ -1213,7 +1213,7 @@ div.form-element {
 */
 div#suggestions {
   /* border: 1px solid #000; */
-  width: 73%;
+  width: 77%;
   padding: 4px;
   margin-top: 0px;
   font-family: Source Sans Pro;
@@ -1267,7 +1267,7 @@ what3words-symbol {
   line-height: 23px;
 }
 
-div#suggestions > div > div {
+div#suggestions .words {
   pointer-events: none;
   display: -ms-flexbox;
   display: flex;
@@ -1293,8 +1293,34 @@ div#suggestions > div > div {
   line-height: 22px;
   color: #0a3049;
 }
+div#suggestions .nearestPlace {
+  pointer-events: none;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0px;
+  position: static;
+  height: 22px;
+  left: 0px;
+  top: 0px;
+  -ms-flex: none;
+  flex: none;
+  -ms-flex-order: 0;
+  order: 0;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  justify-content: space-between;
+  font-size: 17px;
+  line-height: 22px;
+  color: #0a3049;
+}
 
-div#suggestions > div > div:hover {
+div#suggestions > div:hover {
   background: #fff;
   -webkit-box-shadow: inset 0px 5000px 0px rgba(0, 83, 121, 0.08);
   box-shadow: inset 0px 5000px 0px rgba(0, 83, 121, 0.08);
