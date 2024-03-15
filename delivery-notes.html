@@ -8,13 +8,6 @@
     <title>what3words demo store - E-commerce</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <script type="module" async
-        src="https://cdn.what3words.com/javascript-components@4-latest/dist/what3words/what3words.esm.js"></script>
-    <script nomodule async
-        src="https://cdn.what3words.com/javascript-components@4-latest/dist/what3words/what3words.js"></script>
-    <script>
-        window.w3w = { callback: "main", key: "YF0C5HNE" };
-    </script>
 </head>
 
 <body class="w3w-checkout" data-new-gr-c-s-check-loaded="8.910.0" data-gr-ext-installed=""
@@ -343,7 +336,7 @@
                         <label for="delivery_options" class="">Delivery Notes (e.g. what3words address)</label>
                         <textarea id="w3w" name="delivery_options" rows="5"
                             placeholder="e.g. ///lock.spout.radar"></textarea>
-                        <div id="suggestions"></div>
+                    <div id="suggestions"></div>
                     </p>
                 </div>
             </div>
@@ -435,7 +428,8 @@
             </div>
         </form>
     </div>
+    <script
+        src="https://cdn.dev.w3w.io/what3words-freetext@0.0.1-alpha.2/freetext.js?key=YF0C5HNE&baseUrl=https://api.what3words.com"></script>
 </body>
-<script type="text/javascript" src="js/autosuggest-notes.js"></script>
 
 </html>
