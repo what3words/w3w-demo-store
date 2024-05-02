@@ -13,7 +13,7 @@
   "author": "Ives van Hoorne",
   "license": "MIT",
   "devDependencies": {
-    "sass": "^1.70.0",
-    "serve": "^14.2.1"
+    "sass": "^1.76.0",
+    "serve": "^14.2.3"
   }
 }
