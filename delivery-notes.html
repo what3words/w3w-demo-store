@@ -16,11 +16,6 @@
 
     <body class="w3w-checkout" data-new-gr-c-s-check-loaded="8.910.0" data-gr-ext-installed=""
         data-new-gr-c-s-loaded="8.910.0">
-        <script type="text/javascript">
-            const ip_based_latlng = { "latitude": 51.5412, "longitude": -0.2477, "country_code": "GB" };
-            console.log(ip_based_latlng);
-        </script>
-
         <div id="geoloc"></div>
         <div class="wrapper">
 
@@ -29,7 +24,7 @@
                 <div class="span five">
                     <h3>Delivery Address</h3>
                     <p class="form-row wide">
-                        <select class="select-skin" tabindex="-1" autocomplete="off" id="1574406348" name="1291720402">
+                        <select id="countrySelect" name="country" class="select-skin" tabindex="-1" autocomplete="off">
                             <option value="">Select a country…</option>
                             <option value="AX">Åland Islands</option>
                             <option value="AF">Afghanistan</option>
@@ -338,7 +333,7 @@
                     <div id="form_elem" class="form-element order-notes form-row wide">
                         <p class="form-row wide" id="checkout-note">
                             <label for="delivery_options" class="">Delivery Instructions</label>
-                            <what3words-notes api-key="TSTSTSTS" clip-to-country="GB">
+                            <what3words-notes api-key="TSTSTSTS">
                                 <textarea id="w3w" name="delivery_options"
                                     placeholder="Type delivery instructions with your what3words address"
                                     rows="5"></textarea>
@@ -441,3 +436,14 @@
     </body>
 
 </html>
+<script>
+    const countrySelect = document.querySelector('select[name="country"]')
+
+    const what3wordsNotes = document.querySelector('what3words-notes');
+
+    what3wordsNotes.clipToCountry = countrySelect.value;
+
+    countrySelect.addEventListener('change', (e) => {
+        what3wordsNotes.clipToCountry = e.target.value ?? undefined;
+    });
+</script>
