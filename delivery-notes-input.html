@@ -9,9 +9,9 @@
         <link rel="icon" type="image/png" href="images/favicon.png">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
         <script type="module" async
-            src="https://cdn.dev.w3w.io/javascript-components@4.5.0-alpha.5/dist/what3words/what3words.esm.js"></script>
+            src="https://cdn.dev.w3w.io/javascript-components@4.5.0-alpha.6/dist/what3words/what3words.esm.js"></script>
         <script nomodule async
-            src="https://cdn.dev.w3w.io/javascript-components@4.5.0-alpha.5/dist/what3words/what3words.js"></script>
+            src="https://cdn.dev.w3w.io/javascript-components@4.5.0-alpha.6/dist/what3words/what3words.js"></script>
     </head>
 
     <body class="w3w-checkout" data-new-gr-c-s-check-loaded="8.910.0" data-gr-ext-installed=""
@@ -281,19 +281,19 @@
                         <label for="checkout_first_name" class="">First Name
                             <abbr class="required" title="required">*</abbr>
                         </label>
-                        <input type="text" class="input-text " name="checkout_first_name" id="checkout_first_name"
+                        <input type="text" class="input-text" name="checkout_first_name" id="checkout_first_name"
                             placeholder="" value="" required="">
                     </p>
                     <p class="form-row last validate-required" id="checkout_last_name_field">
                         <label for="checkout_last_name" class="">Last Name
                             <abbr class="required" title="required">*</abbr>
                         </label>
-                        <input type="text" class="input-text " name="checkout_last_name" id="checkout_last_name"
+                        <input type="text" class="input-text" name="checkout_last_name" id="checkout_last_name"
                             placeholder="" value="" required="">
                     </p>
                     <p class="form-row form-row wide" id="checkout_company_field">
                         <label for="checkout_company" class="">Company Name</label>
-                        <input type="text" class="input-text " name="checkout_company" id="checkout_company"
+                        <input type="text" class="input-text" name="checkout_company" id="checkout_company"
                             placeholder="" value="">
                     </p>
                     <p class="form-row form-row wide address-field validate-required" id="checkout_address_1_field">
@@ -302,7 +302,7 @@
                         </label>
                         <input class="multi" type="text" name="checkout_address_1" id="checkout_address_1"
                             placeholder="Street address" value="" required="">
-                        <input type="text" class="input-text " name="checkout_address_2" id="checkout_address_2"
+                        <input type="text" class="input-text" name="checkout_address_2" id="checkout_address_2"
                             placeholder="Apartment, suite, unit etc. (optional)" autocomplete="address-line2" value="">
                     </p>
                     <p class="form-row form-row first address-field validate-required" id="checkout_city_field"
@@ -310,33 +310,33 @@
                         <label for="checkout_city" class="">Town / City
                             <abbr class="required" title="required">*</abbr>
                         </label>
-                        <input type="text" class="input-text " name="checkout_city" id="checkout_city" placeholder=""
+                        <input type="text" class="input-text" name="checkout_city" id="checkout_city" placeholder=""
                             value="" required="">
                     </p>
                     <p class="form-row form-row last address-field" id="checkout_postcode_field">
                         <label for="checkout_postcode" class="">Postcode</label>
-                        <input type="text" class="input-text " name="checkout_postcode" id="checkout_postcode"
+                        <input type="text" class="input-text" name="checkout_postcode" id="checkout_postcode"
                             placeholder="" value="">
                     </p>
                     <p class="form-row form-row first validate-required validate-email" id="checkout_email_field">
                         <label for="checkout_email" class="">Email Address
                             <abbr class="required" title="required">*</abbr>
                         </label>
-                        <input type="email" class="input-text " name="checkout_email" id="checkout_email" placeholder=""
+                        <input type="email" class="input-text" name="checkout_email" id="checkout_email" placeholder=""
                             value="" required="">
                     </p>
                     <p class="form-row form-row last validate-required validate-phone" id="checkout_phone_field">
                         <label for="checkout_phone" class="">Phone</label>
-                        <input type="tel" class="input-text " name="checkout_phone" id="checkout_phone" placeholder=""
+                        <input type="tel" class="input-text" name="checkout_phone" id="checkout_phone" placeholder=""
                             value="">
                     </p>
                     <div id="form_elem" class="form-element order-notes form-row wide">
                         <p class="form-row wide" id="checkout-note">
                             <label for="delivery_options" class="">Delivery Instructions</label>
                             <what3words-notes api-key="TSTSTSTS">
-                                <textarea id="w3w" name="delivery_options"
+                                <input slot="input" type="text" id="w3w" name="delivery_options"
                                     placeholder="Type delivery instructions with your what3words address"
-                                    rows="5"></textarea>
+                                    class="input-text"></input>
                             </what3words-notes>
                         </p>
                     </div>
