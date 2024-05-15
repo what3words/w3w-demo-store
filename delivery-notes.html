@@ -9,21 +9,21 @@
         <link rel="icon" type="image/png" href="images/favicon.png">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
         <script type="module" async
-            src="https://cdn.dev.w3w.io/javascript-components@4.5.0-alpha.6/dist/what3words/what3words.esm.js"></script>
+            src="https://cdn.dev.w3w.io/javascript-components@4.5.0-alpha.12/dist/what3words/what3words.esm.js"></script>
         <script nomodule async
-            src="https://cdn.dev.w3w.io/javascript-components@4.5.0-alpha.6/dist/what3words/what3words.js"></script>
+            src="https://cdn.dev.w3w.io/javascript-components@4.5.0-alpha.12/dist/what3words/what3words.js"></script>
     </head>
 
     <body class="w3w-checkout" data-new-gr-c-s-check-loaded="8.910.0" data-gr-ext-installed=""
         data-new-gr-c-s-loaded="8.910.0">
         <div id="geoloc"></div>
-        <div class="wrapper">
-
+        <main class="wrapper">
+            <a href="/">Back</a>
             <form id="checkout-form" name="checkout" method="post" class="w3w-checkout_form" novalidate="novalidate"
                 action="post-checkout.php">
                 <div class="span five">
                     <h3>Delivery Address</h3>
-                    <p class="form-row wide">
+                    <div class="form-row wide">
                         <select id="countrySelect" name="country" class="select-skin" tabindex="-1" autocomplete="off">
                             <option value="">Select a country…</option>
                             <option value="AX">Åland Islands</option>
@@ -276,27 +276,27 @@
                             <option value="ZM">Zambia</option>
                             <option value="ZW">Zimbabwe</option>
                         </select>
-                    </p>
-                    <p class="form-row first validate-required" id="checkout_first_name_field">
+                    </div>
+                    <div class="form-row first validate-required" id="checkout_first_name_field">
                         <label for="checkout_first_name" class="">First Name
                             <abbr class="required" title="required">*</abbr>
                         </label>
                         <input type="text" class="input-text" name="checkout_first_name" id="checkout_first_name"
                             placeholder="" value="" required="">
-                    </p>
-                    <p class="form-row last validate-required" id="checkout_last_name_field">
+                    </div>
+                    <div class="form-row last validate-required" id="checkout_last_name_field">
                         <label for="checkout_last_name" class="">Last Name
                             <abbr class="required" title="required">*</abbr>
                         </label>
                         <input type="text" class="input-text" name="checkout_last_name" id="checkout_last_name"
                             placeholder="" value="" required="">
-                    </p>
-                    <p class="form-row form-row wide" id="checkout_company_field">
+                    </div>
+                    <div class="form-row form-row wide" id="checkout_company_field">
                         <label for="checkout_company" class="">Company Name</label>
                         <input type="text" class="input-text" name="checkout_company" id="checkout_company"
                             placeholder="" value="">
-                    </p>
-                    <p class="form-row form-row wide address-field validate-required" id="checkout_address_1_field">
+                    </div>
+                    <div class="form-row form-row wide address-field validate-required" id="checkout_address_1_field">
                         <label for="checkout_address_1" class="">Address
                             <abbr class="required" title="required">*</abbr>
                         </label>
@@ -304,41 +304,41 @@
                             placeholder="Street address" value="" required="">
                         <input type="text" class="input-text" name="checkout_address_2" id="checkout_address_2"
                             placeholder="Apartment, suite, unit etc. (optional)" autocomplete="address-line2" value="">
-                    </p>
-                    <p class="form-row form-row first address-field validate-required" id="checkout_city_field"
+                    </div>
+                    <div class="form-row form-row first address-field validate-required" id="checkout_city_field"
                         data-o_class="form-row form-row wide address-field validate-required">
                         <label for="checkout_city" class="">Town / City
                             <abbr class="required" title="required">*</abbr>
                         </label>
                         <input type="text" class="input-text" name="checkout_city" id="checkout_city" placeholder=""
                             value="" required="">
-                    </p>
-                    <p class="form-row form-row last address-field" id="checkout_postcode_field">
+                    </div>
+                    <div class="form-row form-row last address-field" id="checkout_postcode_field">
                         <label for="checkout_postcode" class="">Postcode</label>
                         <input type="text" class="input-text" name="checkout_postcode" id="checkout_postcode"
                             placeholder="" value="">
-                    </p>
-                    <p class="form-row form-row first validate-required validate-email" id="checkout_email_field">
+                    </div>
+                    <div class="form-row form-row first validate-required validate-email" id="checkout_email_field">
                         <label for="checkout_email" class="">Email Address
                             <abbr class="required" title="required">*</abbr>
                         </label>
                         <input type="email" class="input-text" name="checkout_email" id="checkout_email" placeholder=""
                             value="" required="">
-                    </p>
-                    <p class="form-row form-row last validate-required validate-phone" id="checkout_phone_field">
+                    </div>
+                    <div class="form-row form-row last validate-required validate-phone" id="checkout_phone_field">
                         <label for="checkout_phone" class="">Phone</label>
                         <input type="tel" class="input-text" name="checkout_phone" id="checkout_phone" placeholder=""
                             value="">
-                    </p>
+                    </div>
                     <div id="form_elem" class="form-element order-notes form-row wide">
-                        <p class="form-row wide" id="checkout-note">
-                            <label for="delivery_options" class="">Delivery Instructions</label>
+                        <div class="form-row wide" id="checkout-note">
                             <what3words-notes api-key="TSTSTSTS">
+                                <label slot="label" for="delivery_options" class="">Delivery Instructions</label>
                                 <textarea slot="input" id="w3w" name="delivery_options"
                                     placeholder="Type delivery instructions with your what3words address"
                                     rows="5"></textarea>
                             </what3words-notes>
-                        </p>
+                        </div>
                     </div>
                 </div>
 
@@ -355,7 +355,8 @@
                             <tbody>
                                 <tr class="cart_item">
                                     <td class="product-name">
-                                        Watch <strong class="product-quantity">× 1</strong> </td>
+                                        Watch <strong class="product-quantity">×
+                                            1</strong> </td>
                                     <td class="product-total">
                                         <span class="Price-amount amount"><span
                                                 class="Price-currencySymbol">£</span>220</span>
@@ -363,7 +364,8 @@
                                 </tr>
                                 <tr class="cart_item">
                                     <td class="product-name">
-                                        Digital Watch <strong class="product-quantity">× 1</strong> </td>
+                                        Digital Watch <strong class="product-quantity">×
+                                            1</strong> </td>
                                     <td class="product-total">
                                         <span class="Price-amount amount"><span
                                                 class="Price-currencySymbol">£</span>220</span>
@@ -384,7 +386,8 @@
                                 <tr class="order-total">
                                     <th>ORDER TOTAL</th>
                                     <td><strong><span class="Price-amount amount"><span
-                                                    class="Price-currencySymbol">£</span>440</span></strong> </td>
+                                                    class="Price-currencySymbol">£</span>440</span></strong>
+                                    </td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -408,17 +411,23 @@
                                 </li>
                                 <li class="terms form-row wide">
                                     <input type="checkbox" name="terms" id="terms" required="">
-                                    <label for="terms">I have read and accept the terms and conditions</label>
+                                    <label for="terms">I have read and accept
+                                        the terms and conditions</label>
                                 </li>
                             </ul>
-                            <div class="form-row place-order">
+                            <div class="place-order">
                                 <noscript>
-                                    Since your browser does not support JavaScript, or it is disabled, please ensure you
-                                    click the &lt;em&gt;Update Totals&lt;/em&gt; button before placing your order. You
+                                    Since your browser does not support
+                                    JavaScript, or it is disabled, please ensure
+                                    you
+                                    click the &lt;em&gt;Update Totals&lt;/em&gt;
+                                    button before placing your order. You
                                     may
-                                    be charged more than the amount stated above if you fail to do so.
+                                    be charged more than the amount stated above
+                                    if you fail to do so.
                                     &lt;br/&gt;&lt;input
-                                    type="submit" class="button alt" name="woocommerce_checkout_update_totals"
+                                    type="submit" class="button alt"
+                                    name="woocommerce_checkout_update_totals"
                                     value="Update
                                     totals" /&gt;
                                 </noscript>
@@ -432,7 +441,7 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </main>
     </body>
 
 </html>

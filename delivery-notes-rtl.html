@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <title>what3words demo store - E-commerce</title>
+        <link rel="icon" type="image/png" href="images/favicon.png">
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <script type="module" async
+            src="https://cdn.dev.w3w.io/javascript-components@4.5.0-alpha.12/dist/what3words/what3words.esm.js"></script>
+        <script nomodule async
+            src="https://cdn.dev.w3w.io/javascript-components@4.5.0-alpha.12/dist/what3words/what3words.js"></script>
+    </head>
+
+    <body class="w3w-checkout" data-new-gr-c-s-check-loaded="8.910.0" data-gr-ext-installed=""
+        data-new-gr-c-s-loaded="8.910.0">
+        <div id="geoloc"></div>
+        <main class="wrapper">
+            <a href="/">العودة</a>
+            <form id="checkout-form" name="checkout" method="post" class="w3w-checkout_form" novalidate="novalidate"
+                action="post-checkout.php">
+                <div class="span five">
+                    <h3>عنوان التوصيل</h3>
+                    <div class="form-row wide">
+                        <select id="countrySelect" name="country" class="select-skin" tabindex="-1" autocomplete="off">
+                            <option value="">اختر الدولة...</option>
+                            <option value="AX">جزر آلاند</option>
+                            <option value="AF">أفغانستان</option>
+                            <option value="AL">ألبانيا</option>
+                            <option value="DZ">الجزائر</option>
+                            <option value="AS">ساموا الأمريكية</option>
+                            <option value="AD">أندورا</option>
+                            <option value="AO">أنغولا</option>
+                            <option value="AI">أنغويلا</option>
+                            <option value="AQ">القطب الجنوبي</option>
+                            <option value="AG">أنتيغوا وبربودا</option>
+                            <option value="AR">الأرجنتين</option>
+                            <option value="AM">أرمينيا</option>
+                            <option value="AW">أروبا</option>
+                            <option value="AU">أستراليا</option>
+                            <option value="AT">النمسا</option>
+                            <option value="AZ">أذربيجان</option>
+                            <option value="BS">الباهاما</option>
+                            <option value="BH">البحرين</option>
+                            <option value="BD">بنغلاديش</option>
+                            <option value="BB">بربادوس</option>
+                            <option value="BY">روسيا البيضاء</option>
+                            <option value="PW">بالاو</option>
+                            <option value="BE">بلجيكا</option>
+                            <option value="BZ">بليز</option>
+                            <option value="BJ">بنين</option>
+                            <option value="BM">برمودا</option>
+                            <option value="BT">بوتان</option>
+                            <option value="BO">بوليفيا</option>
+                            <option value="BQ">بونير وسانت أوستاتيوس وسابا</option>
+                            <option value="BA">البوسنة والهرسك</option>
+                            <option value="BW">بوتسوانا</option>
+                            <option value="BV">جزيرة بوفيه</option>
+                            <option value="BR">البرازيل</option>
+                            <option value="IO">إقليم المحيط الهندي البريطاني</option>
+                            <option value="VG">جزر العذراء البريطانية</option>
+                            <option value="BN">بروناي</option>
+                            <option value="BG">بلغاريا</option>
+                            <option value="BF">بوركينا فاسو</option>
+                            <option value="BI">بوروندي</option>
+                            <option value="KH">كمبوديا</option>
+                            <option value="CM">الكاميرون</option>
+                            <option value="CA">كندا</option>
+                            <option value="CV">الرأس الأخضر</option>
+                            <option value="KY">جزر كايمان</option>
+                            <option value="CF">جمهورية أفريقيا الوسطى</option>
+                            <option value="TD">تشاد</option>
+                            <option value="CL">تشيلي</option>
+                            <option value="CN">الصين</option>
+                            <option value="CX">جزيرة الكريسماس</option>
+                            <option value="CC">جزر كوكوس (كيلينغ)</option>
+                            <option value="CO">كولومبيا</option>
+                            <option value="KM">جزر القمر</option>
+                            <option value="CG">الكونغو (برازافيل)</option>
+                            <option value="CD">الكونغو (كينشاسا)</option>
+                            <option value="CK">جزر كوك</option>
+                            <option value="CR">كوستاريكا</option>
+                            <option value="CI">ساحل العاج</option>
+                            <option value="HR">كرواتيا</option>
+                            <option value="CU">كوبا</option>
+                            <option value="CW">كوراساو</option>
+                            <option value="CY">قبرص</option>
+                            <option value="CZ">جمهورية التشيك</option>
+                            <option value="DK">الدنمارك</option>
+                            <option value="DJ">جيبوتي</option>
+                            <option value="DM">دومينيكا</option>
+                            <option value="DO">جمهورية الدومينيكان</option>
+                            <option value="EC">الإكوادور</option>
+                            <option value="EG">مصر</option>
+                            <option value="SV">السلفادور</option>
+                            <option value="GQ">غينيا الاستوائية</option>
+                            <option value="ER">إريتريا</option>
+                            <option value="EE">إستونيا</option>
+                            <option value="ET">إثيوبيا</option>
+                            <option value="FK">جزر فوكلاند</option>
+                            <option value="FO">جزر فارو</option>
+                            <option value="FJ">فيجي</option>
+                            <option value="FI">فنلندا</option>
+                            <option value="FR">فرنسا</option>
+                            <option value="GF">غويانا الفرنسية</option>
+                            <option value="PF">بولينيزيا الفرنسية</option>
+                            <option value="TF">المقاطعات الجنوبية الفرنسية</option>
+                            <option value="GA">الغابون</option>
+                            <option value="GM">غامبيا</option>
+                            <option value="GE">جورجيا</option>
+                            <option value="DE">ألمانيا</option>
+                            <option value="GH">غانا</option>
+                            <option value="GI">جبل طارق</option>
+                            <option value="GR">اليونان</option>
+                            <option value="GL">جرينلاند</option>
+                            <option value="GD">غرينادا</option>
+                            <option value="GP">جوادلوب</option>
+                            <option value="GU">غوام</option>
+                            <option value="GT">غواتيمالا</option>
+                            <option value="GG">غيرنزي</option>
+                            <option value="GN">غينيا</option>
+                            <option value="GW">غينيا بيساو</option>
+                            <option value="GY">غيانا</option>
+                            <option value="HT">هايتي</option>
+                            <option value="HM">جزيرة هيرد وجزر ماكدونالد</option>
+                            <option value="HN">هندوراس</option>
+                            <option value="HK">هونغ كونغ</option>
+                            <option value="HU">المجر</option>
+                            <option value="IS">آيسلندا</option>
+                            <option value="IN">الهند</option>
+                            <option value="ID">إندونيسيا</option>
+                            <option value="IR">إيران</option>
+                            <option value="IQ">العراق</option>
+                            <option value="IM">جزيرة مان</option>
+                            <option value="IL">إسرائيل</option>
+                            <option value="IT">إيطاليا</option>
+                            <option value="JM">جامايكا</option>
+                            <option value="JP">اليابان</option>
+                            <option value="JE">جيرسي</option>
+                            <option value="JO">الأردن</option>
+                            <option value="KZ">كازاخستان</option>
+                            <option value="KE">كينيا</option>
+                            <option value="KI">كيريباتي</option>
+                            <option value="KW">الكويت</option>
+                            <option value="KG">قيرغيزستان</option>
+                            <option value="LA">لاوس</option>
+                            <option value="LV">لاتفيا</option>
+                            <option value="LB">لبنان</option>
+                            <option value="LS">ليسوتو</option>
+                            <option value="LR">ليبيريا</option>
+                            <option value="LY">ليبيا</option>
+                            <option value="LI">ليختنشتاين</option>
+                            <option value="LT">ليتوانيا</option>
+                            <option value="LU">لوكسمبورغ</option>
+                            <option value="MO">ماكاو الصينية</option>
+                            <option value="MK">مقدونيا</option>
+                            <option value="MG">مدغشقر</option>
+                            <option value="MW">ملاوي</option>
+                            <option value="MY">ماليزيا</option>
+                            <option value="MV">جزر المالديف</option>
+                            <option value="ML">مالي</option>
+                            <option value="MT">مالطا</option>
+                            <option value="MH">جزر مارشال</option>
+                            <option value="MQ">مارتينيك</option>
+                            <option value="MR">موريتانيا</option>
+                            <option value="MU">موريشيوس</option>
+                            <option value="YT">مايوت</option>
+                            <option value="MX">المكسيك</option>
+                            <option value="FM">ميكرونيزيا</option>
+                            <option value="MD">مولدوفا</option>
+                            <option value="MC">موناكو</option>
+                            <option value="MN">منغوليا</option>
+                            <option value="ME">الجبل الأسود</option>
+                            <option value="MS">مونتسيرات</option>
+                            <option value="MA">المغرب</option>
+                            <option value="MZ">موزمبيق</option>
+                            <option value="MM">ميانمار</option>
+                            <option value="NA">ناميبيا</option>
+                            <option value="NR">ناورو</option>
+                            <option value="NP">نيبال</option>
+                            <option value="NL">هولندا</option>
+                            <option value="NC">كاليدونيا الجديدة</option>
+                            <option value="NZ">نيوزيلندا</option>
+                            <option value="NI">نيكاراغوا</option>
+                            <option value="NE">النيجر</option>
+                            <option value="NG">نيجيريا</option>
+                            <option value="NU">نيوي</option>
+                            <option value="NF">جزيرة نورفولك</option>
+                            <option value="KP">كوريا الشمالية</option>
+                            <option value="MP">جزر ماريانا الشمالية</option>
+                            <option value="NO">النرويج</option>
+                            <option value="OM">عمان</option>
+                            <option value="PK">باكستان</option>
+                            <option value="PS">الأراضي الفلسطينية</option>
+                            <option value="PA">بنما</option>
+                            <option value="PG">بابوا غينيا الجديدة</option>
+                            <option value="PY">باراغواي</option>
+                            <option value="PE">بيرو</option>
+                            <option value="PH">الفلبين</option>
+                            <option value="PN">بيتكيرن</option>
+                            <option value="PL">بولندا</option>
+                            <option value="PT">البرتغال</option>
+                            <option value="PR">بورتوريكو</option>
+                            <option value="QA">قطر</option>
+                            <option value="IE">جمهورية أيرلندا</option>
+                            <option value="RE">ريونيون</option>
+                            <option value="RO">رومانيا</option>
+                            <option value="RU">روسيا</option>
+                            <option value="RW">رواندا</option>
+                            <option value="ST">ساو تومي وبرينسيبي</option>
+                            <option value="BL">سانت بارتيليمي</option>
+                            <option value="SH">سانت هيلينا</option>
+                            <option value="KN">سانت كيتس ونيفيس</option>
+                            <option value="LC">سانت لوسيا</option>
+                            <option value="SX">سانت مارتن (الجزء الهولندي)</option>
+                            <option value="MF">سانت مارتن (الجزء الفرنسي)</option>
+                            <option value="PM">سانت بيير وميكلون</option>
+                            <option value="VC">سانت فنسنت وجزر غرينادين</option>
+                            <option value="WS">ساموا</option>
+                            <option value="SM">سان مارينو</option>
+                            <option value="SA">المملكة العربية السعودية</option>
+                            <option value="SN">السنغال</option>
+                            <option value="RS">صربيا</option>
+                            <option value="SC">سيشل</option>
+                            <option value="SL">سيراليون</option>
+                            <option value="SG">سنغافورة</option>
+                            <option value="SK">سلوفاكيا</option>
+                            <option value="SI">سلوفينيا</option>
+                            <option value="SB">جزر سليمان</option>
+                            <option value="SO">الصومال</option>
+                            <option value="ZA">جنوب أفريقيا</option>
+                            <option value="GS">جورجيا الجنوبية وجزر ساندويتش الجنوبية</option>
+                            <option value="KR">كوريا الجنوبية</option>
+                            <option value="SS">جنوب السودان</option>
+                            <option value="ES">إسبانيا</option>
+                            <option value="LK">سريلانكا</option>
+                            <option value="SD">السودان</option>
+                            <option value="SR">سورينام</option>
+                            <option value="SJ">سفالبارد وجان ماين</option>
+                            <option value="SZ">سوازيلاند</option>
+                            <option value="SE">السويد</option>
+                            <option value="CH">سويسرا</option>
+                            <option value="SY">سوريا</option>
+                            <option value="TW">تايوان</option>
+                            <option value="TJ">طاجيكستان</option>
+                            <option value="TZ">تنزانيا</option>
+                            <option value="TH">تايلاند</option>
+                            <option value="TL">تيمور الشرقية</option>
+                            <option value="TG">توغو</option>
+                            <option value="TK">توكيلو</option>
+                            <option value="TO">تونغا</option>
+                            <option value="TT">ترينيداد وتوباغو</option>
+                            <option value="TN">تونس</option>
+                            <option value="TR">تركيا</option>
+                            <option value="TM">تركمانستان</option>
+                            <option value="TC">جزر توركس وكايكوس</option>
+                            <option value="TV">توفالو</option>
+                            <option value="UG">أوغندا</option>
+                            <option value="UA">أوكرانيا</option>
+                            <option value="AE">الإمارات العربية المتحدة</option>
+                            <option value="GB" selected="selected">المملكة المتحدة (المملكة المتحدة)</option>
+                            <option value="US">الولايات المتحدة (الولايات المتحدة)</option>
+                            <option value="UM">جزر الولايات المتحدة الصغيرة النائية</option>
+                            <option value="VI">جزر العذراء الأمريكية</option>
+                            <option value="UY">أوروغواي</option>
+                            <option value="UZ">أوزبكستان</option>
+                            <option value="VU">فانواتو</option>
+                            <option value="VA">الفاتيكان</option>
+                            <option value="VE">فنزويلا</option>
+                            <option value="VN">فيتنام</option>
+                            <option value="WF">واليس وفوتونا</option>
+                            <option value="EH">الصحراء الغربية</option>
+                            <option value="YE">اليمن</option>
+                            <option value="ZM">زامبيا</option>
+                            <option value="ZW">زيمبابوي</option>
+                        </select>
+                    </div>
+                    <div class="form-row first validate-required" id="checkout_first_name_field">
+                        <label for="checkout_first_name" class="">الاسم الأول
+                            <abbr class="required" title="مطلوب">*</abbr>
+                        </label>
+                        </label>
+                        <input type="text" class="input-text" name="checkout_first_name" id="checkout_first_name"
+                            placeholder="" value="" required="">
+                    </div>
+                    <div class="form-row last validate-required" id="checkout_last_name_field">
+                        <label for="checkout_last_name" class="">الاسم الأخير
+                            <abbr class="required" title="مطلوب">*</abbr>
+                        </label>
+                        </label>
+                        <input type="text" class="input-text" name="checkout_last_name" id="checkout_last_name"
+                            placeholder="" value="" required="">
+                    </div>
+                    <div class="form-row form-row wide" id="checkout_company_field">
+                        <label for="checkout_company" class="">اسم الشركة</label>
+                        <input type="text" class="input-text" name="checkout_company" id="checkout_company"
+                            placeholder="" value="">
+                    </div>
+                    <div class="form-row form-row wide address-field validate-required" id="checkout_address_1_field">
+                        <label for="checkout_address_1" class="">العنوان
+                            <abbr class="required" title="مطلوب">*</abbr>
+                        </label>
+                        </label>
+                        <input class="multi" type="text" name="checkout_address_1" id="checkout_address_1"
+                            placeholder="عنوان الشارع" value="" required="">
+                        <input type="text" class="input-text" name="checkout_address_2" id="checkout_address_2"
+                            placeholder="شقة، جناح، وحدة، إلخ. (اختياري)" autocomplete="address-line2" value="">
+                    </div>
+                    <div class="form-row form-row first address-field validate-required" id="checkout_city_field"
+                        data-o_class="form-row form-row wide address-field validate-required">
+                        <label for="checkout_city" class="">المدينة
+                            <abbr class="required" title="مطلوب">*</abbr>
+                        </label>
+                        </label>
+                        <input type="text" class="input-text" name="checkout_city" id="checkout_city" placeholder=""
+                            value="" required="">
+                    </div>
+                    <div class="form-row form-row last address-field" id="checkout_postcode_field">
+                        <label for="checkout_postcode" class="">الرمز البريدي</label>
+                        <input type="text" class="input-text" name="checkout_postcode" id="checkout_postcode"
+                            placeholder="" value="">
+                    </div>
+                    <div class="form-row form-row first validate-required validate-email" id="checkout_email_field">
+                        <label for="checkout_email" class="">عنوان البريد الإلكتروني
+                            <abbr class="required" title="مطلوب">*</abbr>
+                        </label>
+                        </label>
+                        <input type="email" class="input-text" name="checkout_email" id="checkout_email" placeholder=""
+                            value="" required="">
+                    </div>
+                    <div class="form-row form-row last validate-required validate-phone" id="checkout_phone_field">
+                        <label for="checkout_phone" class="">هاتف</label>
+                        <input type="tel" class="input-text" name="checkout_phone" id="checkout_phone" placeholder=""
+                            value="">
+                    </div>
+                    <div id="form_elem" class="form-element order-notes form-row wide">
+                        <div class="form-row wide" id="checkout-note">
+                            <what3words-notes api-key="TSTSTSTS">
+                                <label slot="label" for="delivery_options" class="">تعليمات
+                                    التوصيل</label>
+                                <textarea slot="input" id="w3w" name="delivery_options"
+                                    placeholder="اكتب تعليمات التوصيل مع عنوان what3words الخاص بك" rows="5"></textarea>
+                                <div slot="tooltip">
+                                    <h3 class="tooltip-title">هل تعلم؟</h3>
+                                    <p class="tooltip-content">يمكنك إضافة عنوان
+                                        <a href="https://delivery.w3w.co" target="_blank" rel="noopener noreferrer">
+                                            what3words
+                                        </a>
+                                        لمساعدة شركاء التوصيل في العثور عليك في
+                                        المرة الأولى
+                                        على سبيل المثال<br />///بدلة.تثبيت.التأكد
+                                    </p>
+                                </div>
+                            </what3words-notes>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span five">
+                    <h3 id="order_review_heading">طلبك</h3>
+                    <div id="order_review" class="checkout-review-order">
+                        <table class="shop_table checkout-review-order-table">
+                            <thead>
+                                <tr>
+                                    <th class="product-name">المنتج</th>
+                                    <th class="product-total">الإجمالي</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="cart_item">
+                                    <td class="product-name">
+                                        ساعة رقمية <strong class="product-quantity">×
+                                            1</strong>
+                                    </td>
+                                    <td class="product-total">
+                                        <span class="Price-amount amount"><span
+                                                class="Price-currencySymbol">£</span>220</span>
+                                    </td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">
+                                        ساعة رقمية <strong class="product-quantity">×
+                                            1</strong>
+                                    </td>
+                                    <td class="product-total">
+                                        <span class="Price-amount amount"><span
+                                                class="Price-currencySymbol">£</span>220</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="cart-subtotal">
+                                    <th>إجمالي السلة</th>
+                                    <td><span class="Price-amount amount"><span
+                                                class="Price-currencySymbol">£</span>440</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>الشحن والتغليف</th>
+                                    <td>مجاناً</td>
+                                </tr>
+                                </tr>
+                                <tr class="order-total">
+                                    <th>إجمالي الطلب</th>
+                                    <td><strong><span class="Price-amount amount"><span
+                                                    class="Price-currencySymbol">£</span>440</span></strong>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div id="payment" class="checkout-payment">
+                            <h3>الدفع</h3>
+                            <ul class="payment_methods payment_methods methods">
+                                <li class="payment_method payment_method_cheque">
+                                    <input id="payment_method_cheque" type="radio" class="input-radio"
+                                        name="payment_method" value="cheque" checked="checked"
+                                        data-order_button_text="">
+                                    <label for="payment_method_cheque">
+                                        بطاقة ائتمان </label>
+                                </li>
+                                <li class="payment_method payment_method_paypal">
+                                    <input id="payment_method_paypal" type="radio" class="input-radio"
+                                        name="payment_method" value="paypal" data-order_button_text="Proceed to PayPal">
+                                    <label for="payment_method_paypal">
+                                        بي بال <img
+                                            src="https://www.paypalobjects.com/webstatic/mktg/Logo/AM_mc_vs_ms_ae_UK.png"
+                                            alt="علامة قبول بي بال"></label>
+                                </li>
+                                <li class="terms form-row wide">
+                                    <input type="checkbox" name="terms" id="terms" required="">
+                                    <label for="terms">لقد قرأت ووافقت على الشروط
+                                        والأحكام</label>
+                                </li>
+                            </ul>
+                            <div class="place-order">
+                                <noscript>
+                                    Since your browser does not support JavaScript,
+                                    or it is disabled, please ensure
+                                    you
+                                    click the &lt;em&gt;Update Totals&lt;/em&gt;
+                                    button before placing your order.
+                                    You
+                                    may
+                                    be charged more than the amount stated above if
+                                    you fail to do so.
+                                    &lt;br/&gt;&lt;input
+                                    type="submit" class="button alt"
+                                    name="woocommerce_checkout_update_totals"
+                                    value="Update
+                                    totals" /&gt;
+                                </noscript>
+                                <input type="submit" class="button alt" name="woocommerce_checkout_place_order"
+                                    id="place_order" value="تأكيد الطلب" data-value="تأكيد الطلب">
+                                <input type="hidden" id="_wpnonce" name="_wpnonce" value="77a7b7ccca">
+                                <input type="hidden" name="_wp_http_referer"
+                                    value="/canvas/checkout/?wc-ajax=update_order_review">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </body>
+
+</html>
+<script>
+    const countrySelect = document.querySelector('select[name="country"]')
+
+    const what3wordsNotes = document.querySelector('what3words-notes');
+
+    what3wordsNotes.clipToCountry = countrySelect.value;
+
+    countrySelect.addEventListener('change', (e) => {
+        what3wordsNotes.clipToCountry = e.target.value ?? undefined;
+    });
+</script>
