@@ -48,7 +48,7 @@ textarea {
   background: $light-gray;
   border: none;
   padding: 12px;
-  width: calc(100% - 4px);
+  width: 100%;
   @include box-sizing(border-box);
   @include fs(13);
   color: $text-color;

@@ -40,7 +40,7 @@ $mobile : 8;
 	display: block;
 	position: relative;
 	@include box-sizing(border-box);
-	z-index: 100;
+	// z-index: 100;
 
 	&.alpha {
 		padding-left: 0;

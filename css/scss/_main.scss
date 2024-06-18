@@ -3,196 +3,239 @@
 /**********************/
 
 div.form-element {
-	width: 100%;
-	padding: 0px;
-  }
+  width: 100%;
+  padding: 0px;
+}
 
 /**
 * Add the what3words suggestions dropdown
 */
 div#suggestions {
-border: 1px solid $black;
-width: calc(100% - 8px);
-padding: 4px;
+  border: 1px solid $black;
+  width: calc(100% - 8px);
+  padding: 4px;
 }
 
 div#suggestions:empty {
-border: 0px;
+  border: 0px;
 }
 
 div#suggestions > div {
-padding: 4px;
+  padding: 4px;
 }
 
 div#suggestions > div:hover {
-background-color: $light-gray;
-cursor: pointer;
+  background-color: $light-gray;
+  cursor: pointer;
 }
 
 div#suggestions > div:not(:last-of-type) {
-border-bottom: 1px solid $black;
+  border-bottom: 1px solid $black;
 }
 
 div#suggestions > div > div:first-of-type {
-display: flex;
+  display: flex;
 }
 
 div#suggestions > div > div:last-of-type {
-display: flex;
-justify-content: space-between;
-padding-left: 14px;
-font-size: 10pt;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 14px;
+  font-size: 10pt;
 }
 
 .wrapper {
-	max-width: 1170px;
-	margin: 3rem auto;
+  height: 100%;
+  max-width: 1170px;
+  margin: 3rem auto;
 }
 
 .w3w-checkout_form {
-	display: flex;
+  display: flex;
+
+  @include dw(8) {
+    display: block !important;
+  }
 }
 
+.list_of_demo_links {
+  @include dw(8) {
+    margin: 0 20px;
+  }
+}
+
+ul.demo_links {
+  @include dw(8) {
+    padding: 5% !important;
+    margin: 5% 0 0 0 !important;
+    width: auto !important;
+  }
+}
+
+#place_order {
+  @include dw(8) {
+    width: 100%;
+  }
+}
+what3words-notes {
+  [slot='tooltip'] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tooltip-title {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .tooltip-content {
+    margin: 0;
+    font-size: 14px;
+  }
+}
 
 .span.five {
-	padding: 0 65px;
+  padding: 0 65px;
 
-	@include dw(8) {
-		width: 100%;
-	    padding: 0 5%;
-	}
+  @include dw(8) {
+    width: 100% !important;
+    padding: 0 5% !important;
+  }
 
-	section {
-		margin-bottom: 5rem;
-	}
+  section {
+    // margin-bottom: 5rem;
+  }
 
-	p {
-		color: $text-color;
-	    line-height: 1.4;
+  p {
+    color: $text-color;
+    line-height: 1.4;
 
-	    .post-checkout & {
-    	    margin: 3rem 0;
-    	    @include fs(16);
-	    }
-	}
+    .post-checkout & {
+      margin: 3rem 0;
+      @include fs(16);
+    }
+  }
 }
 
 .shop_table {
-	color: $text-color;
-	width: 100%;
-	text-align: start;
-    border: 1px solid #e7e7e7;
-    padding: 12px;
-    @include border-radius(4px);
-    width: 100%;
+  color: $text-color;
+  width: 100%;
+  text-align: start;
+  border: 1px solid #e7e7e7;
+  padding: 12px;
+  @include border-radius(4px);
+  width: 100%;
 
-	&.mobile {
-		display: none;
-	}
+  &.mobile {
+    display: none;
+  }
 
-    @include dw(8) {
-    	&.desktop {
-    		display: none
-    	}
-
-    	&.mobile {
-    		display: table;
-    	}
-
+  @include dw(8) {
+    &.desktop {
+      display: none;
     }
 
-	td, th, strong {
-		font-weight: normal;
-	}
+    &.mobile {
+      display: table;
+    }
+  }
 
-	td, th {
-		font-size: 16px;
-		padding: 12px 0;
-	}
+  td,
+  th,
+  strong {
+    font-weight: normal;
+  }
 
-	tr {
-		td, th {
-			border-bottom: 1px solid #e7e7e7;
-		}
-	}
+  td,
+  th {
+    font-size: 16px;
+    padding: 12px 0;
+  }
 
-	.product-total {
-		text-align: end;
-	}
+  tr {
+    td,
+    th {
+      border-bottom: 1px solid #e7e7e7;
+    }
+  }
 
-	thead,tfoot,tbody {
-		width: 100%;
-	}
+  .product-total {
+    text-align: end;
+  }
 
-	thead {
-		th {
-			text-transform: uppercase;
-		}
-	}
+  thead,
+  tfoot,
+  tbody {
+    width: 100%;
+  }
 
-	tfoot {
-		tr {
-			th {
-				text-align: start;
-			}
+  thead {
+    th {
+      text-transform: uppercase;
+    }
+  }
 
-			td {
-				text-align: end;
-			}
+  tfoot {
+    tr {
+      th {
+        text-align: start;
+      }
 
-			&:last-child {
-				th, td {
-					border-bottom: none;
-				}
-			}
-		}
-	}
+      td {
+        text-align: end;
+      }
 
-	.order-total {
-		th, td strong {
-			font-weight: bold;
-		}
-	}
+      &:last-child {
+        th,
+        td {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  .order-total {
+    th,
+    td strong {
+      font-weight: bold;
+    }
+  }
 }
 
-
 #payment {
-	margin-top: 4rem;
+  margin-top: 4rem;
 
-	.payment_methods {
-		list-style-type: none;
-	    padding: 0;
+  .payment_methods {
+    list-style-type: none;
+    padding: 0;
 
-	    li {
-	    	margin-bottom: 5px;
+    li {
+      margin-bottom: 5px;
 
-	    	img {
-	    		display: block;
-	    	}
-	    }
+      img {
+        display: block;
+      }
+    }
+  }
 
-	}
-
-	.button {
-		margin-bottom: 4rem;
-	}
+  .button {
+    margin-bottom: 4rem;
+  }
 }
 
 .post-checkout {
+  .action {
+    text-align: center;
 
-	.action {
-		text-align: center;
-
-		.button {
-			margin: 3rem 0;
-		}
-	}
+    .button {
+      margin: 3rem 0;
+    }
+  }
 }
-
 
 // When W3W address entered hide details
 body.checkout_w3w {
-	.checkout_w3w {
-		display: none;
-	}
+  .checkout_w3w {
+    display: none;
+  }
 }
