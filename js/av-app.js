@@ -49,16 +49,40 @@ function showSuggestions(suggestions) {
             const listItem = document.createElement('li');
             const button = document.createElement('button');
             button.className = 'suggestion-button';
-            button.addEventListener('click', () => selectSuggestion(suggestion.w3w));
 
-            const prefix = document.createElement('span');
-            prefix.className = 'prefix';
-            prefix.textContent = '///';
+            let addressText;
 
-            const text = document.createTextNode(` ${suggestion.w3w}, ${suggestion.place}`);
+            if (suggestion.w3w && suggestion.place) {
+                // Use the what3words format
+                const prefix = document.createElement('span');
+                prefix.className = 'prefix';
+                prefix.textContent = '///';
 
-            button.appendChild(prefix);
-            button.appendChild(text);
+                const text = document.createTextNode(` ${suggestion.w3w}, ${suggestion.place}`);
+                button.appendChild(prefix);
+                button.appendChild(text);
+
+                // Set click event to call `selectSuggestion` for what3words address
+                button.addEventListener('click', () => selectSuggestion(suggestion.w3w));
+
+            } else {
+                // Use the traditional address format as fallback
+                addressText = [
+                    suggestion.Organisation,
+                    suggestion.SubBuilding,
+                    suggestion.Number,
+                    suggestion.Building,
+                    suggestion.Street,
+                    suggestion.Town,
+                    suggestion.PostCode
+                ].filter(Boolean).join(', ');
+
+                button.textContent = addressText;
+
+                // Set click event to call `selectLocation` directly for traditional address
+                button.addEventListener('click', () => selectLocation(suggestion.Idx, addressText));
+            }
+
             listItem.appendChild(button);
             suggestionsList.appendChild(listItem);
         });
@@ -137,14 +161,14 @@ function showLocations(locations, w3wAddress) {
 }
 
 // Step 5: Fetch and display full address details for selected location
-async function selectLocation(idx, w3wAddress) {
+async function selectLocation(idx, addressText) {
     const url = `https://posttagtesting.com/PAYG203PGN.php?cmd=getidx&key=${apiKey}&id=${id}&ptid=${ptid}&idx=${idx}`;
     
     try {
         const response = await fetch(url);
         const data = await response.json();
 
-        displayAddressDetails(data, w3wAddress);
+        displayAddressDetails(data, addressText);  // Use addressText for display
 
     } catch (error) {
         console.error("Error fetching address details:", error);
