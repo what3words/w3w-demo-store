@@ -3,240 +3,221 @@ const id = '3000';
 const ptid = '5BQdHLA3nC0';
 const inputField = document.getElementById('w3w-input');
 const suggestionsList = document.getElementById('suggestions');
-const addressDetails = document.getElementById('address-details');
-const searchIcon = document.getElementById('search-icon');
 const clearIcon = document.getElementById('clear-icon');
 const locationDropdown = document.getElementById('location-dropdown');
 
-// Event listener to track input and start suggestion search after third word begins
-inputField.addEventListener('input', () => {
-    const inputText = inputField.value.trim();
-    const words = inputText.split('.'); // Assuming w3w words are separated by dots
+document.addEventListener('DOMContentLoaded', () => {
+    // Show or hide the clear icon based on input field content
+    inputField.addEventListener('input', () => {
+        const inputText = inputField.value.trim();
+        clearIcon.classList.toggle('hidden', inputText === '');
 
-    // Only start suggesting once there are 2 full stops and the third word starts
-    if (words.length >= 3 && words[2].length > 0) {
-        // Call the function to retrieve suggestions
-        getFullLocation(inputText);
-    } else {
-        // Hide suggestions if less than 3 words
-        locationDropdown.classList.add('hidden');
-    }
-});
+        const words = inputText.split('.');
 
-// Function to handle the Enter key press
-function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-        getFullLocation(inputField.value);
-    }
-}
-
-// Step 1: Get full location for entered what3words address
-async function getFullLocation(address) {
-    const url = `https://posttagtesting.com/PAYG203PGN.php?cmd=getfulllocation&key=${apiKey}&id=${id}&ptid=${ptid}&address=${address}`;
-    
-    try {
-        const response = await fetch(url);
-        const responseData = await response.json();
-
-        if (responseData.data) {
-            showSuggestions(responseData.data);
+        // Check if input matches a likely what3words address or a traditional address
+        if (
+            (words.length >= 3 && words[2].length > 0) ||  // what3words format
+            inputText.length > 5 // Allow traditional addresses with reasonable length
+        ) {
+            getFullLocation(inputText);  // Trigger suggestions for both formats
         } else {
-            console.error("No data found in response:", responseData);
-            suggestionsList.innerHTML = '<li>No suggestions available</li>';
+            locationDropdown.classList.add('hidden');
         }
+    });
+    // Event listener for the clear icon to clear the input
+    clearIcon.addEventListener('click', () => {
+        inputField.value = '';
+        clearIcon.classList.add('hidden');
+        locationDropdown.classList.add('hidden');
+        suggestionsList.innerHTML = '';
+    });
 
-    } catch (error) {
-        console.error("Error fetching full location:", error);
+    // Function to handle the Enter key press
+    inputField.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+        }
+    });
+
+    // Step 1: Get full location for entered what3words address or traditional address
+    async function getFullLocation(address) {
+        const url = `https://posttagtesting.com/PAYG203PGN.php?cmd=getfulllocation&key=${apiKey}&id=${id}&ptid=${ptid}&address=${address}`;
+        
+        try {
+            const response = await fetch(url);
+
+            // Check if the response is valid JSON by reading the text first
+            const responseText = await response.text();
+            
+            try {
+                // Parse JSON if possible
+                const responseData = JSON.parse(responseText);
+                
+                if (responseData.data) {
+                    showSuggestions(responseData.data);
+                } else {
+                    console.error("No data found in response:", responseData);
+                    suggestionsList.innerHTML = '<li>No suggestions available</li>';
+                }
+            } catch (jsonError) {
+                // Log the raw text response if JSON parsing fails
+                console.error("Failed to parse JSON. Raw response:", responseText);
+                suggestionsList.innerHTML = '<li>Error: Invalid JSON response</li>';
+            }
+
+        } catch (error) {
+            console.error("Error fetching full location:", error);
+        }
     }
-}
 
-// Step 2: Display suggestions and add click event to select one
-function showSuggestions(suggestions) {
-    // Clear existing suggestions
-    suggestionsList.innerHTML = '';
+    // Function to display suggestions and add click event to select one
+    function showSuggestions(suggestions) {
+        suggestionsList.innerHTML = '';
+        if (suggestions.length > 0) {
+            locationDropdown.classList.remove('hidden');
 
-    if (suggestions.length > 0) {
-        // Show the dropdown if there are suggestions
-        locationDropdown.classList.remove('hidden');
+            suggestions.forEach((suggestion) => {
+                const listItem = document.createElement('li');
+                const button = document.createElement('button');
+                button.className = 'suggestion-button';
 
-        suggestions.forEach((suggestion) => {
+                let addressText;
+
+                if (suggestion.w3w && suggestion.place) {
+                    const prefix = document.createElement('span');
+                    prefix.className = 'prefix';
+                    prefix.textContent = '///';
+
+                    const text = document.createTextNode(` ${suggestion.w3w}, ${suggestion.place}`);
+                    button.appendChild(prefix);
+                    button.appendChild(text);
+                    button.addEventListener('click', () => selectSuggestion(suggestion.w3w));
+
+                } else {
+                    addressText = [
+                        suggestion.Organisation,
+                        suggestion['Sub Building'],
+                        suggestion.Number,
+                        suggestion.Building,
+                        suggestion.Street,
+                        suggestion.Town,
+                        suggestion.PostCode
+                    ].filter(Boolean).join(', ');
+
+                    button.textContent = addressText;
+                    button.addEventListener('click', () => selectLocation(suggestion.Idx, addressText));
+                }
+
+                listItem.appendChild(button);
+                suggestionsList.appendChild(listItem);
+            });
+        } else {
+            locationDropdown.classList.add('hidden');
+        }
+    }
+
+    // Step 3: Handle selection of a suggestion and fetch related locations
+    async function selectSuggestion(w3wAddress) {
+        const url = `https://posttagtesting.com/PAYG203PGN.php?cmd=getw3w&key=${apiKey}&id=${id}&ptid=${ptid}&address=${w3wAddress}`;
+        
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data && data.data && data.data.length > 0) {
+                const sortedLocations = data.data.sort((a, b) => parseInt(a.Distance) - parseInt(b.Distance));
+                showLocations(sortedLocations, w3wAddress);
+            } else {
+                locationDropdown.classList.remove('hidden');
+                suggestionsList.innerHTML = '<li>No locations found</li>';
+            }
+
+        } catch (error) {
+            console.error("Error fetching locations:", error);
+            locationDropdown.classList.remove('hidden');
+            suggestionsList.innerHTML = '<li>Error fetching locations</li>';
+        }
+    }
+
+    // Step 4: Display locations and add click event to select one
+    function showLocations(locations, w3wAddress) {
+        suggestionsList.innerHTML = '';
+
+        locations.forEach((location) => {
             const listItem = document.createElement('li');
             const button = document.createElement('button');
             button.className = 'suggestion-button';
+            
+            const addressText = [
+                location.Organisation,
+                location.SubBuilding,
+                location.Number,
+                location.Building,
+                location.Street,
+                location.Town,
+                location.PostCode
+            ].filter(Boolean).join(', ');
 
-            let addressText;
+            const addressLine = document.createElement('span');
+            addressLine.className = 'address-line';
+            addressLine.textContent = addressText;
 
-            if (suggestion.w3w && suggestion.place) {
-                // Use the what3words format
-                const prefix = document.createElement('span');
-                prefix.className = 'prefix';
-                prefix.textContent = '///';
+            const distanceText = document.createElement('span');
+            distanceText.className = 'distance';
+            distanceText.textContent = `${location.Distance || ''}`;
 
-                const text = document.createTextNode(` ${suggestion.w3w}, ${suggestion.place}`);
-                button.appendChild(prefix);
-                button.appendChild(text);
+            button.appendChild(addressLine);
+            button.appendChild(distanceText);
 
-                // Set click event to call `selectSuggestion` for what3words address
-                button.addEventListener('click', () => selectSuggestion(suggestion.w3w));
-
-            } else {
-                // Use the traditional address format as fallback
-                addressText = [
-                    suggestion.Organisation,
-                    suggestion.SubBuilding,
-                    suggestion.Number,
-                    suggestion.Building,
-                    suggestion.Street,
-                    suggestion.Town,
-                    suggestion.PostCode
-                ].filter(Boolean).join(', ');
-
-                button.textContent = addressText;
-
-                // Set click event to call `selectLocation` directly for traditional address
-                button.addEventListener('click', () => selectLocation(suggestion.Idx, addressText));
-            }
-
+            button.addEventListener('click', () => {
+                selectLocation(location.Idx, w3wAddress);
+                inputField.value = '';  // Clear the input field
+                clearIcon.classList.add('hidden');  // Hide the clear icon
+                locationDropdown.classList.add('hidden');  // Hide the location dropdown
+            });
             listItem.appendChild(button);
             suggestionsList.appendChild(listItem);
         });
-    } else {
-        // Hide the dropdown if there are no suggestions
-        locationDropdown.classList.add('hidden');
     }
-}
 
-// Step 3: Handle selection of a suggestion and fetch related locations
-async function selectSuggestion(w3wAddress) {
-    const url = `https://posttagtesting.com/PAYG203PGN.php?cmd=getw3w&key=${apiKey}&id=${id}&ptid=${ptid}&address=${w3wAddress}`;
-    
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-
-        if (data && data.data && data.data.length > 0) {
-            // If data is present, sort and display it
-            const sortedLocations = data.data.sort((a, b) => parseInt(a.Distance) - parseInt(b.Distance));
-            showLocations(sortedLocations, w3wAddress);
-        } else {
-            // Show "No locations found" message if there's no data
-            locationDropdown.classList.remove('hidden'); // Make sure dropdown is visible
-            suggestionsList.innerHTML = '<li>No locations found</li>';
-        }
-
-    } catch (error) {
-        console.error("Error fetching locations:", error);
-        // Optionally show an error message in the dropdown as well
-        locationDropdown.classList.remove('hidden');
-        suggestionsList.innerHTML = '<li>Error fetching locations</li>';
-    }
-}
-
-// Step 4: Display locations and add click event to select one
-function showLocations(locations, w3wAddress) {
-    suggestionsList.innerHTML = '';
-
-    locations.forEach((location) => {
-        const listItem = document.createElement('li');
-        const button = document.createElement('button');
-        button.className = 'suggestion-button';
+    // Step 5: Fetch and display full address details for selected location
+    async function selectLocation(idx, addressText) {
+        const url = `https://posttagtesting.com/PAYG203PGN.php?cmd=getidx&key=${apiKey}&id=${id}&ptid=${ptid}&idx=${idx}`;
         
-        // Combine all address details into a single line
-        const addressText = [
-            location.Organisation,
-            location.SubBuilding,
-            location.Number,
-            location.Building,
-            location.Street,
-            location.Town,
-            location.PostCode
-        ].filter(Boolean).join(', ');
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
 
-        // Address line element
-        const addressLine = document.createElement('span');
-        addressLine.className = 'address-line';
-        addressLine.textContent = addressText;
+            displayAddressDetails(data, addressText);
+            locationDropdown.classList.add('hidden'); // Hide the location dropdown after selection
 
-        // Distance element, bold and aligned to the right
-        const distanceText = document.createElement('span');
-        distanceText.className = 'distance';
-        distanceText.textContent = `${location.Distance || ''}`;
+        } catch (error) {
+            console.error("Error fetching address details:", error);
+        }
+    }
 
-        // Append address and distance to the button
-        button.appendChild(addressLine);
-        button.appendChild(distanceText);
-
-        // Add event listener to select the location on click
-        button.addEventListener('click', () => selectLocation(location.Idx, w3wAddress));
-
-        listItem.appendChild(button);
-        suggestionsList.appendChild(listItem);
-    });
-}
-
-// Step 5: Fetch and display full address details for selected location
-async function selectLocation(idx, addressText) {
-    const url = `https://posttagtesting.com/PAYG203PGN.php?cmd=getidx&key=${apiKey}&id=${id}&ptid=${ptid}&idx=${idx}`;
+    // Populate the fields with selected address details
+    function displayAddressDetails(data, what3WordsAddress) {
+        const addressData = data.data[0];
     
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-
-        displayAddressDetails(data, addressText);  // Use addressText for display
-
-    } catch (error) {
-        console.error("Error fetching address details:", error);
-    }
-}
-
-// Function to display detailed address information
-function displayAddressDetails(data, what3WordsAddress) {
-    const addressData = data.data[0];
-
-    const fullAddress = `${addressData.Organisation || ''}, ${addressData['Sub Building'] || ''}, ${addressData.Number || ''}, ${addressData.Building || ''}, ${addressData.Street || ''}, ${addressData.Town || ''}, ${addressData['Post Code'] || ''}`.replace(/,\s*,/g, ',').replace(/^,|,$/g, '');
-    const addressLine1 = `${addressData.Organisation || ''}, ${addressData['Sub Building'] || ''}, ${addressData.Number || ''}, ${addressData.Building || ''}`.replace(/,\s*,/g, ',').replace(/^,|,$/g, '');
-    const addressLine2 = `${addressData.Street || ''}`;
-    const townCity = `${addressData.Town || ''}`;
-    const postcode = `${addressData['Post Code'] || ''}`;
-    const latitude = `${addressData.Latitude || 'N/A'}`;
-    const longitude = `${addressData.Longitude || 'N/A'}`;
-
-    addressDetails.innerHTML = `
-        <h2>Address Details</h2>
-        <p><strong>What3Words Address:</strong> ${what3WordsAddress}</p>
-        <p><strong>Full Address:</strong> ${fullAddress}</p>
-        <p><strong>Address Line 1:</strong> ${addressLine1}</p>
-        <p><strong>Address Line 2:</strong> ${addressLine2}</p>
-        <p><strong>Town/City:</strong> ${townCity}</p>
-        <p><strong>Postcode:</strong> ${postcode}</p>
-        <p><strong>Latitude:</strong> ${latitude}</p>
-        <p><strong>Longitude:</strong> ${longitude}</p>
-    `;
-} 
-
-// Trigger search and toggle icons
-function triggerSearch() {
-    const address = inputField.value.trim();
-    if (address) {
-        searchIcon.classList.add('hidden');
-        clearIcon.classList.remove('hidden');
-        getFullLocation(address);  // Call your search function here
-    }
-}
-
-// Clear the input field and reset icons
-function clearInput() {
-    inputField.value = '';
-    clearIcon.classList.add('hidden');
-    searchIcon.classList.remove('hidden');
-    locationDropdown.classList.add('hidden'); // Hide dropdown
-    suggestionsList.innerHTML = '';
-    addressDetails.innerHTML = '';
-}
-
-// Handle enter key to trigger search
-inputField.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-        triggerSearch();
+        const companyField = document.getElementById('checkout_company');
+        if (companyField) companyField.value = addressData.Organisation || '';
+    
+        const address1Field = document.getElementById('checkout_address_1');
+        if (address1Field) address1Field.value = [
+            addressData['Sub Building'] || '',
+            addressData.Number || '',
+            addressData.Building || '',
+            addressData.Street || '',
+        ].filter(Boolean).join(', ');
+    
+        const cityField = document.getElementById('checkout_city');
+        if (cityField) cityField.value = addressData.Town || '';
+    
+        const postcodeField = document.getElementById('checkout_postcode');
+        if (postcodeField) postcodeField.value = addressData['Post Code'] || '';
+    
+        const w3wField = document.getElementById('checkout_w3w');
+        if (w3wField) w3wField.value = what3WordsAddress || '';
     }
 });
