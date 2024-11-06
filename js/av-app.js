@@ -8,6 +8,20 @@ const searchIcon = document.getElementById('search-icon');
 const clearIcon = document.getElementById('clear-icon');
 const locationDropdown = document.getElementById('location-dropdown');
 
+// Event listener to track input and start suggestion search after third word begins
+inputField.addEventListener('input', () => {
+    const inputText = inputField.value.trim();
+    const words = inputText.split('.'); // Assuming w3w words are separated by dots
+
+    // Only start suggesting once there are 2 full stops and the third word starts
+    if (words.length >= 3 && words[2].length > 0) {
+        // Call the function to retrieve suggestions
+        getFullLocation(inputText);
+    } else {
+        // Hide suggestions if less than 3 words
+        locationDropdown.classList.add('hidden');
+    }
+});
 
 // Function to handle the Enter key press
 function handleKeyPress(event) {
