@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
@@ -16,7 +16,7 @@ body {
     text-align: left;
     margin: auto;
     top: 25px;
-}
+} */
 
 .input-container {
     position: relative;

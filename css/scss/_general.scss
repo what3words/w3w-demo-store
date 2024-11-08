@@ -1,3 +1,5 @@
+@import 'mixins';
+
 html {
 	height: 100%;
 	font-size: 62.5%;
@@ -43,8 +45,9 @@ a {
 
 .row {
 	max-width: 100%;
-	@include clearfix;
 	margin: 0;
+	@include clearfix;
+
 }
 
 .clear {
