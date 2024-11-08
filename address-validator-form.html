@@ -18,19 +18,6 @@
         <a href="/" class="button-back"> << Back</a>
         <form id="checkout-form" name="checkout" class="w3w-checkout_form" onsubmit="event.preventDefault();">
             <div class="span five">
-             <!-- what3words Input Field -->
-             <div class="form-row wide" id="checkout-what3words-input">
-                <label for="w3w-input" class="">
-                    Address Search
-                </label>
-                <div class="input-container">
-                    <input type="text" id="w3w-input" name="checkout_w3w" placeholder="e.g. ///lock.spout.radar" autocomplete="off">
-                    <img src="/images/icons/clear.svg" id="clear-icon" class="clear-icon hidden">
-                </div>
-                <div id="location-dropdown" class="hidden">
-                    <ul id="suggestions"></ul>
-                </div>
-            </div>
                 <h3>Delivery Address</h3>
                 <div class="form-row wide">
                     <select id="countrySelect" name="country" class="select-skin" tabindex="-1" autocomplete="off">
@@ -304,6 +291,19 @@
                     <label for="checkout_company" class="">Company Name</label>
                     <input type="text" class="input-text " name="checkout_company" id="checkout_company" placeholder=""
                         value="">
+                </div>
+                <!-- what3words Input Field - address validator-->
+                <div class="form-row form-row wide address-field" id="checkout-what3words-input">
+                    <label for="w3w-input" class="">
+                        Address Lookup
+                    </label>
+                    <div class="input-container">
+                        <input type="text" id="w3w-input" name="checkout_w3w" placeholder="Type address to start or what3words" autocomplete="off">
+                        <img src="/images/icons/clear.svg" id="clear-icon" class="clear-icon hidden">
+                    </div>
+                    <div id="location-dropdown" class="hidden">
+                        <ul id="suggestions"></ul>
+                    </div>
                 </div>
                 <div class="form-row form-row wide address-field validate-required" id="checkout_address_1_field">
                     <label for="checkout_address_1" class="">Address
