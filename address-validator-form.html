@@ -8,10 +8,7 @@
     <title>what3words demo store - E-commerce</title>
     <link rel="icon" type="image/png" href="/images/favicon_logo.png">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
-    <script type="module" async
-        src="https://cdn.dev.w3w.io/javascript-components@4.9.3/dist/what3words/what3words.esm.js"></script>
-    <script nomodule async
-        src="https://cdn.dev.w3w.io/javascript-components@4.9.3/dist/what3words/what3words.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="/css/av-styles.css" /> -->
 </head>
 
 <body class="w3w-checkout" data-new-gr-c-s-check-loaded="8.910.0" data-gr-ext-installed=""
@@ -19,9 +16,21 @@
     <div id="geoloc"></div>
     <main class="wrapper">
         <a href="/" class="button-back"> << Back</a>
-        <form id="checkout-form" name="checkout" method="post" class="w3w-checkout_form" novalidate="novalidate"
-            action="post-checkout.php">
+        <form id="checkout-form" name="checkout" class="w3w-checkout_form" onsubmit="event.preventDefault();">
             <div class="span five">
+             <!-- what3words Input Field -->
+             <div class="form-row wide" id="checkout-what3words-input">
+                <label for="w3w-input" class="">
+                    Address Search
+                </label>
+                <div class="input-container">
+                    <input type="text" id="w3w-input" name="checkout_w3w" placeholder="e.g. ///lock.spout.radar" autocomplete="off">
+                    <img src="/images/icons/clear.svg" id="clear-icon" class="clear-icon hidden">
+                </div>
+                <div id="location-dropdown" class="hidden">
+                    <ul id="suggestions"></ul>
+                </div>
+            </div>
                 <h3>Delivery Address</h3>
                 <div class="form-row wide">
                     <select id="countrySelect" name="country" class="select-skin" tabindex="-1" autocomplete="off">
@@ -315,7 +324,7 @@
                 </div>
                 <div class="form-row form-row last address-field" id="checkout_postcode_field">
                     <label for="checkout_postcode" class="">Postcode</label>
-                    <input type="text" class="input-text " name="checkout_postcode" id="checkout_postcode"
+                    <input type="text" class="input-text" name="checkout_postcode" id="checkout_postcode"
                         placeholder="" value="">
                 </div>
                 <div class="form-row form-row first validate-required validate-email" id="checkout_email_field">
@@ -331,8 +340,7 @@
                         value="">
                 </div>
                 <div class="form-row wide" id="checkout-what-3-words">
-                    <label for="checkout_w3w" class="">
-                        what3words address (optional)
+                    <label for="checkout_w3w" class="">what3words address (optional) 
                         <span class="tooltip">
                             <img class="icon" src="images/icons/help.svg" alt="What is This?">
                             <div class="content top">
@@ -345,10 +353,9 @@
                             </div>
                         </span>
                     </label>
-                    <what3words-autosuggest api_key="YF0C5HNE" variant="inherit">
-                        <input class="" name="checkout_w3w" type="text" placeholder="e.g. ///lock.spout.radar"
+
+                    <input class="input-text" id="checkout_w3w" name="checkout_w3w" type="text" placeholder="e.g. ///lock.spout.radar"
                             optional />
-                    </what3words-autosuggest>
                 </div>
                 <div id="form_elem" class="form-element order-notes form-row wide">
                     <div class="form-row wide" id="checkout-note">
@@ -457,10 +464,11 @@
             </div>
         </form>
     </main>
+    <script src="/js/av-app.js"></script>
 </body>
 
 </html>
-<script>
+<!-- <script>
     const countrySelect = document.querySelector('select[name="country"]')
 
     const what3wordsAutoSuggest = document.querySelector('what3words-autosuggest');
@@ -470,4 +478,4 @@
     countrySelect.addEventListener('change', (e) => {
         what3wordsAutoSuggest.clip_to_country = e.target.value ?? undefined;
     });
-</script>
+</script> -->

@@ -1,3 +1,4 @@
+@use "sass:math";
 @mixin dw($width){
     @if $width > 15 {
         @media only screen and (max-width: $width + 'px'){
@@ -33,7 +34,7 @@
 
 @mixin fs($size){
     font-size: ($size) + px;
-    font-size: ($size / 10) + rem;
+    font-size: math.div($size, 10) + rem;
 }
 
 @mixin icon($icon){
