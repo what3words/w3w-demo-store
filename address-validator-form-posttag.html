@@ -20,7 +20,7 @@
             <div class="span five">
                 <h3>Delivery Address</h3>
                 <div class="form-row wide">
-                    <select id="checkout_country" name="country" class="select-skin" tabindex="-1" autocomplete="off">
+                    <select id="countrySelect" name="country" class="select-skin" tabindex="-1" autocomplete="off">
                         <option value="">Select a country…</option>
                         <option value="AX">Åland Islands</option>
                         <option value="AF">Afghanistan</option>
@@ -256,7 +256,7 @@
                         <option value="UG">Uganda</option>
                         <option value="UA">Ukraine</option>
                         <option value="AE">United Arab Emirates</option>
-                        <option value="GB" selected="selected">United Kingdom</option>
+                        <option value="GB" selected="selected">United Kingdom (UK)</option>
                         <option value="US">United States (US)</option>
                         <option value="UM">United States (US) Minor Outlying Islands</option>
                         <option value="VI">United States (US) Virgin Islands</option>
@@ -298,7 +298,7 @@
                         Address Lookup
                     </label>
                     <div class="input-container">
-                        <input type="text" id="w3w-input" name="checkout_w3w" placeholder="Type your address, what3words, or postcode" autocomplete="off">
+                        <input type="text" id="w3w-input" name="checkout_w3w" placeholder="Type address to start or what3words" autocomplete="off">
                         <img src="/images/icons/clear.svg" id="clear-icon" class="clear-icon hidden">
                     </div>
                     <div id="location-dropdown" class="hidden">
@@ -311,10 +311,8 @@
                     </label>
                     <input class="multi" type="text" name="checkout_address_1" id="checkout_address_1"
                         placeholder="Street address" value="" required="">
-                    <input class="multi" type="text" class="input-text " name="checkout_address_2" id="checkout_address_2"
+                    <input type="text" class="input-text " name="checkout_address_2" id="checkout_address_2"
                         placeholder="Apartment, suite, unit etc. (optional)" autocomplete="address-line2" value="">
-                    <input class="multi" type="text" class="input-text " name="checkout_address_3" id="checkout_address_3"
-                        placeholder="Address line 3 (optional)" autocomplete="address-line3" value="">
                 </div>
                 <div class="form-row form-row first address-field validate-required" id="checkout_city_field"
                     data-o_class="form-row form-row wide address-field validate-required">
@@ -466,16 +464,18 @@
             </div>
         </form>
     </main>
-    <script type="text/javascript">
-        !function (e, t, c) {
-            e.swiftcomplete = e.swiftcomplete || {};
-            var s = t.createElement("script");
-            s.async = !0, s.src = c;
-            var r = t.getElementsByTagName("script")[0];
-            r.parentNode.insertBefore(s, r)
-        }(window, document, "https://www.swiftcomplete.com/js/what3words.js");
-    </script>
-    <script type="text/javascript" src="/js/sc-app.js"></script>
+    <script src="/js/av-app.js"></script>
 </body>
 
 </html>
+<!-- <script>
+    const countrySelect = document.querySelector('select[name="country"]')
+
+    const what3wordsAutoSuggest = document.querySelector('what3words-autosuggest');
+
+    what3wordsAutoSuggest.clip_to_country = countrySelect.value;
+
+    countrySelect.addEventListener('change', (e) => {
+        what3wordsAutoSuggest.clip_to_country = e.target.value ?? undefined;
+    });
+</script> -->
