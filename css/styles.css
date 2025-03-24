@@ -1557,17 +1557,17 @@ body.checkout_w3w .checkout_w3w {
 }
 
 .selectric-focus .selectric {
-  background: gainsboro;
+  background: rgb(219.5, 219.5, 219.5);
 }
 
 .selectric-hover .selectric {
-  background: #e8e8e8;
+  background: rgb(232.25, 232.25, 232.25);
 }
 .selectric-hover .selectric .button {
-  color: #e6e6e6;
+  color: rgb(229.5, 229.5, 229.5);
 }
 .selectric-hover .selectric .button:after {
-  border-top-color: #e6e6e6;
+  border-top-color: rgb(229.5, 229.5, 229.5);
 }
 
 .selectric-open {
@@ -1642,7 +1642,7 @@ body.checkout_w3w .checkout_w3w {
   top: 100%;
   left: 0;
   background: #f5f5f5;
-  border: 1px solid #c4c4c4;
+  border: 1px solid rgb(195.5, 195.5, 195.5);
   z-index: -1;
   box-shadow: 0 0 10px -6px;
 }
