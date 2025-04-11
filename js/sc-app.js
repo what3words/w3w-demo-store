@@ -17,9 +17,9 @@ function initialiseSwiftcomplete() {
 }
 
 function initSwiftcomplete() {
-    swiftcompletew3w.runWhenReady(() => {
+    swiftcomplete.runWhenReady(() => {
         const searchField = document.getElementById(SWIFTCOMPLETE_SEARCH_FIELD_ID);
-        swiftcompletew3w.controls[SWIFTCOMPLETE_SEARCH_FIELD_ID] = new swiftcompletew3w.PlaceAutoComplete({
+        swiftcomplete.controls[SWIFTCOMPLETE_SEARCH_FIELD_ID] = new swiftcomplete.SwiftLookup({
             field: searchField,
             key: SWIFTCOMPLETE_API_KEY,
             searchFor: "what3words,address",
@@ -37,14 +37,14 @@ function initSwiftcomplete() {
             ]
         });
 
-        const control = swiftcompletew3w.controls[SWIFTCOMPLETE_SEARCH_FIELD_ID];
+        const control = swiftcomplete.controls[SWIFTCOMPLETE_SEARCH_FIELD_ID];
         control.groupBy('road,emptyroad');
         control.setMaxAutocompleteResults(5);
         control.setMaxContainerResults(100);
         control.setCountries('gb');
     });
 
-    document.getElementById('w3w-input').addEventListener('swiftcomplete:place:selected', function (e) {
+    document.getElementById('w3w-input').addEventListener('swiftcomplete:swiftlookup:selected', function (e) {
         const lines = e.detail.result.populatedRecord.lines;
         console.log(lines);
 
