@@ -2325,6 +2325,18 @@ body.w3w-checkout #checkout-form {
   }
 }
 
+/* ── Override legacy #w3w-input rules from _main.scss ── */
+/* `_main.scss` ships `#w3w-input { padding: 10px 25px; ... }` for the
+   pre-Shopify demo layout. Specificity (1,0,0) beats our `.ff > input`
+   (0,1,1), so we re-state the .ff input contract here with the id boost. */
+body.w3w-checkout .ff > #w3w-input {
+  padding: 18px 40px 4px 12px;
+  border: 1px solid #c9cccf;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
 /* ── Section primitives ────────────────────────── */
 .cs-section {
   margin-bottom: 32px;
