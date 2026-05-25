@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
 /**
@@ -2291,5 +2292,302 @@ body.checkout_w3w .checkout_w3w {
 /* Scoped to body.w3w-checkout  */
 /* on address-validator-form.   */
 /********************************/
+body.w3w-checkout {
+  background: #fff;
+  color: #1a1a1a;
+  font-family: "Roboto", system-ui, -apple-system, sans-serif;
+}
+body.w3w-checkout .wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 32px 64px;
+}
+body.w3w-checkout .button-back {
+  display: inline-block;
+  color: #6b7177;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+body.w3w-checkout .button-back:hover {
+  color: #1a1a1a;
+}
+body.w3w-checkout #checkout-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  body.w3w-checkout #checkout-form {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* ── Section primitives ────────────────────────── */
+.cs-section {
+  margin-bottom: 32px;
+}
+.cs-section > h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: #1a1a1a;
+}
+.cs-section__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+.cs-section__head > h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.cs-section__link {
+  font-size: 14px;
+  color: #2c6ecb;
+  text-decoration: underline;
+}
+.cs-section__sub {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: #6b7177;
+}
+
+/* ── Checkbox row ──────────────────────────────── */
+.cs-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+  font-size: 14px;
+  color: #1a1a1a;
+  cursor: pointer;
+}
+.cs-check > input[type=checkbox] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #1a1a1a;
+}
+.cs-check--terms {
+  margin: 16px 0;
+}
+
+/* ── Radio cards (shipping + payment) ──────────── */
+.cs-radio {
+  border: 1px solid #c9cccf;
+  border-radius: 6px;
+  margin: 0 0 8px;
+  padding: 0;
+  background: #fff;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.cs-radio--selected {
+  border-color: #1a1a1a;
+  background: #f4f6ff;
+}
+.cs-radio__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  font-size: 15px;
+}
+.cs-radio__row > input[type=radio] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #1a1a1a;
+}
+.cs-radio__label {
+  flex: 1;
+}
+.cs-radio__price {
+  font-weight: 500;
+}
+.cs-radio__body {
+  padding: 0 16px 16px 46px;
+  border-top: 1px solid #e3e5e7;
+  margin-top: 4px;
+  padding-top: 16px;
+  display: none;
+}
+.cs-radio--selected > .cs-radio__body {
+  display: block;
+}
+
+/* ── Brand badges (payment) ────────────────────── */
+.cs-brands {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.cs-brand {
+  display: inline-block;
+  padding: 3px 6px;
+  border: 1px solid #c9cccf;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #1a1a1a;
+  background: #fff;
+  line-height: 1.2;
+}
+.cs-brand--paypal {
+  color: #003087;
+  border-color: #003087;
+  letter-spacing: 0;
+}
+
+/* ── Place order ───────────────────────────────── */
+.cs-place-order {
+  display: block;
+  width: 100%;
+  height: 52px;
+  margin-top: 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.cs-place-order:hover {
+  background: #000;
+}
+.cs-place-order:active {
+  background: #333;
+}
+
+/* ── Right column: order summary ───────────────── */
+.checkout-right {
+  padding-top: 8px;
+}
+
+.cs-summary {
+  background: #fafbfc;
+  border: 1px solid #e3e5e7;
+  border-radius: 8px;
+  padding: 24px;
+}
+.cs-summary__items {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+}
+.cs-summary__items > li {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 0;
+}
+.cs-summary__thumb {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 6px;
+  background: #e3e5e7;
+  background-image: url("/images/favicon_logo.png");
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.cs-summary__qty {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+  font-weight: 600;
+}
+.cs-summary__name {
+  font-size: 14px;
+}
+.cs-summary__price {
+  font-size: 14px;
+  font-weight: 500;
+}
+.cs-summary__gift {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: stretch;
+  margin: 16px 0;
+}
+.cs-summary__gift > .ff {
+  margin-bottom: 0;
+}
+.cs-summary__apply {
+  height: 56px;
+  padding: 0 20px;
+  border: 1px solid #c9cccf;
+  border-radius: 6px;
+  background: #f4f6f8;
+  color: #1a1a1a;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.cs-summary__apply:hover {
+  background: #e9ecef;
+}
+.cs-summary__totals {
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px solid #e3e5e7;
+}
+.cs-summary__totals > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 6px 0;
+  font-size: 14px;
+}
+.cs-summary__totals > div > dt {
+  margin: 0;
+  color: #1a1a1a;
+}
+.cs-summary__totals > div > dd {
+  margin: 0;
+}
+.cs-summary__sub {
+  color: #6b7177;
+  font-weight: 400;
+}
+.cs-summary__total {
+  padding-top: 12px !important;
+  border-top: 1px solid #e3e5e7;
+  margin-top: 8px;
+}
+.cs-summary__total > dt {
+  font-size: 16px !important;
+  font-weight: 600;
+}
+.cs-summary__total > dd {
+  font-size: 20px;
+  font-weight: 600;
+}
+.cs-summary__currency {
+  font-size: 12px;
+  color: #6b7177;
+  margin-right: 6px;
+}
 
 /*# sourceMappingURL=styles.css.map */
