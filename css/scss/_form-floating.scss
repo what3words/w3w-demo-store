@@ -26,14 +26,16 @@
     font-family: inherit;
 
     &:focus {
-      border-color: #1a1a1a;
-      outline: 2px solid #1a1a1a;
+      border-color: #659be6;
+      //outline: 2px solid #1a1a1a;
       outline-offset: -2px;
     }
 
     // The placeholder must be a single space (not empty) in the markup so
     // :placeholder-shown is reliable across browsers.
-    &::placeholder { color: transparent; }
+    &::placeholder {
+      color: transparent;
+    }
   }
 
   > select {
@@ -55,8 +57,14 @@
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
+    margin: 0;
+    padding: 0;
+    // Override the global `label { min-height: 30px }` from _forms.scss
+    // so the floated 12px label doesn't render in a 30px-tall box.
+    min-height: 0;
     color: #6b7177;
     font-size: 16px;
+    line-height: 1;
     pointer-events: none;
     background: transparent;
     transition: transform .15s ease, font-size .15s ease, top .15s ease, color .15s ease;
@@ -71,7 +79,7 @@
   > select:valid + label,
   > textarea:not(:placeholder-shown) + label,
   > textarea:focus + label {
-    top: 10px;
+    top: 8px;
     transform: translateY(0);
     font-size: 12px;
   }
@@ -83,6 +91,7 @@
     -webkit-box-shadow: 0 0 0 1000px #fff inset;
     transition: background-color 9999s ease-in-out 0s;
   }
+
   > input:-webkit-autofill + label {
     top: 10px;
     transform: translateY(0);
@@ -103,13 +112,26 @@
   }
 
   &.has-icon > input,
-  &.has-icon > select { padding-right: 40px; }
+  &.has-icon > select {
+    padding-right: 40px;
+  }
 }
 
 // Row helpers
-.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.row-3 { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 12px; }
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.row-3 {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 12px;
+}
 
 @media (max-width: 600px) {
-  .row-2, .row-3 { grid-template-columns: 1fr; }
+  .row-2, .row-3 {
+    grid-template-columns: 1fr;
+  }
 }

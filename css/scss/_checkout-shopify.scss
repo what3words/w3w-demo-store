@@ -23,8 +23,9 @@ body.w3w-checkout--shopify {
     display: inline-block;
     color: #6b7177;
     text-decoration: none;
-    font-size: 14px;
-    margin-bottom: 16px;
+    font-size: 16px;
+    margin-bottom: 3rem;
+    padding-left: 0;
     &:hover { color: #1a1a1a; }
   }
 
@@ -101,7 +102,6 @@ body.w3w-checkout--shopify .ff > #w3w-input {
     width: 18px;
     height: 18px;
     margin: 0;
-    accent-color: #1a1a1a;
   }
 
   &--terms { margin: 16px 0; }
@@ -118,7 +118,7 @@ body.w3w-checkout--shopify .ff > #w3w-input {
   transition: border-color .15s ease, background .15s ease;
 
   &--selected {
-    border-color: #1a1a1a;
+    border-color: #659be6;
     background: #f4f6ff;
   }
 
@@ -134,7 +134,6 @@ body.w3w-checkout--shopify .ff > #w3w-input {
       width: 18px;
       height: 18px;
       margin: 0;
-      accent-color: #1a1a1a;
     }
   }
 
@@ -142,7 +141,7 @@ body.w3w-checkout--shopify .ff > #w3w-input {
   &__price { font-weight: 500; }
 
   &__body {
-    padding: 0 16px 16px 46px;
+    padding: 0 16px 16px 16px;
     border-top: 1px solid #e3e5e7;
     margin-top: 4px;
     padding-top: 16px;
@@ -177,6 +176,14 @@ body.w3w-checkout--shopify .ff > #w3w-input {
     border-color: #003087;
     letter-spacing: 0;
   }
+}
+
+.cs-brand-img {
+  display: inline-block;
+  width: auto;
+  height: 24px;
+  object-fit: contain;
+  vertical-align: middle;
 }
 
 /* ── Place order ───────────────────────────────── */
@@ -230,7 +237,7 @@ body.w3w-checkout--shopify .ff > #w3w-input {
     border-radius: 6px;
     background: #e3e5e7;
     background-image: url("/images/favicon_logo.png");
-    background-size: 70%;
+    background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
   }
@@ -241,8 +248,7 @@ body.w3w-checkout--shopify .ff > #w3w-input {
     right: -6px;
     min-width: 18px;
     height: 18px;
-    padding: 0 4px;
-    border-radius: 50%;
+    border-radius: 6px;
     background: #1a1a1a;
     color: #fff;
     font-size: 11px;

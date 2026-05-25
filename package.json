@@ -4,7 +4,10 @@
   "description": "A template for HTML and CSS",
   "main": "index.html",
   "scripts": {
-    "start": "serve -p 4000"
+    "start": "serve -p 4000",
+    "build:css": "sass css/scss/styles.scss css/styles.css",
+    "watch:css": "sass --watch css/scss/styles.scss:css/styles.css",
+    "dev": "concurrently -k -n serve,sass -c blue,magenta \"npm start\" \"npm run watch:css\""
   },
   "keywords": [
     "html",
@@ -13,6 +16,7 @@
   "author": "Ives van Hoorne",
   "license": "MIT",
   "devDependencies": {
+    "concurrently": "^9.2.1",
     "sass": "^1.76.0",
     "serve": "^14.2.3"
   }
