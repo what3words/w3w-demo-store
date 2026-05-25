@@ -2286,5 +2286,10 @@ body.checkout_w3w .checkout_w3w {
     grid-template-columns: 1fr;
   }
 }
+/********************************/
+/* Shopify-style checkout       */
+/* Scoped to body.w3w-checkout  */
+/* on address-validator-form.   */
+/********************************/
 
 /*# sourceMappingURL=styles.css.map */
