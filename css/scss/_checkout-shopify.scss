@@ -1,10 +1,14 @@
-/********************************/
-/* Shopify-style checkout       */
-/* Scoped to body.w3w-checkout  */
-/* on address-validator-form.   */
-/********************************/
+/********************************************/
+/* Shopify-style checkout                    */
+/* Scoped to body.w3w-checkout--shopify so   */
+/* sibling pages (/checkout, /delivery-notes,*/
+/* /address-validator-form-posttag, etc.)    */
+/* keep their original layout. The marker    */
+/* class is added only on                    */
+/* address-validator-form.html.              */
+/********************************************/
 
-body.w3w-checkout {
+body.w3w-checkout--shopify {
   background: #fff;
   color: #1a1a1a;
   font-family: 'Roboto', system-ui, -apple-system, sans-serif;
@@ -39,8 +43,9 @@ body.w3w-checkout {
 /* ── Override legacy #w3w-input rules from _main.scss ── */
 /* `_main.scss` ships `#w3w-input { padding: 10px 25px; ... }` for the
    pre-Shopify demo layout. Specificity (1,0,0) beats our `.ff > input`
-   (0,1,1), so we re-state the .ff input contract here with the id boost. */
-body.w3w-checkout .ff > #w3w-input {
+   (0,1,1), so we re-state the .ff input contract here with the id boost.
+   Scoped to --shopify so the other demo pages keep their #w3w-input. */
+body.w3w-checkout--shopify .ff > #w3w-input {
   padding: 18px 40px 4px 12px;
   border: 1px solid #c9cccf;
   border-radius: 6px;

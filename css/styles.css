@@ -2287,39 +2287,43 @@ body.checkout_w3w .checkout_w3w {
     grid-template-columns: 1fr;
   }
 }
-/********************************/
-/* Shopify-style checkout       */
-/* Scoped to body.w3w-checkout  */
-/* on address-validator-form.   */
-/********************************/
-body.w3w-checkout {
+/********************************************/
+/* Shopify-style checkout                    */
+/* Scoped to body.w3w-checkout--shopify so   */
+/* sibling pages (/checkout, /delivery-notes,*/
+/* /address-validator-form-posttag, etc.)    */
+/* keep their original layout. The marker    */
+/* class is added only on                    */
+/* address-validator-form.html.              */
+/********************************************/
+body.w3w-checkout--shopify {
   background: #fff;
   color: #1a1a1a;
   font-family: "Roboto", system-ui, -apple-system, sans-serif;
 }
-body.w3w-checkout .wrapper {
+body.w3w-checkout--shopify .wrapper {
   max-width: 1100px;
   margin: 0 auto;
   padding: 24px 32px 64px;
 }
-body.w3w-checkout .button-back {
+body.w3w-checkout--shopify .button-back {
   display: inline-block;
   color: #6b7177;
   text-decoration: none;
   font-size: 14px;
   margin-bottom: 16px;
 }
-body.w3w-checkout .button-back:hover {
+body.w3w-checkout--shopify .button-back:hover {
   color: #1a1a1a;
 }
-body.w3w-checkout #checkout-form {
+body.w3w-checkout--shopify #checkout-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: start;
 }
 @media (max-width: 900px) {
-  body.w3w-checkout #checkout-form {
+  body.w3w-checkout--shopify #checkout-form {
     grid-template-columns: 1fr;
     gap: 32px;
   }
@@ -2328,8 +2332,9 @@ body.w3w-checkout #checkout-form {
 /* ── Override legacy #w3w-input rules from _main.scss ── */
 /* `_main.scss` ships `#w3w-input { padding: 10px 25px; ... }` for the
    pre-Shopify demo layout. Specificity (1,0,0) beats our `.ff > input`
-   (0,1,1), so we re-state the .ff input contract here with the id boost. */
-body.w3w-checkout .ff > #w3w-input {
+   (0,1,1), so we re-state the .ff input contract here with the id boost.
+   Scoped to --shopify so the other demo pages keep their #w3w-input. */
+body.w3w-checkout--shopify .ff > #w3w-input {
   padding: 18px 40px 4px 12px;
   border: 1px solid #c9cccf;
   border-radius: 6px;
