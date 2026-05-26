@@ -47,16 +47,18 @@ function initSwiftcomplete() {
 
         countrySelect.addEventListener('change', function () {
             control.setCountries(this.value ? this.value.toLowerCase() : 'gb');
-            ['checkout_w3w_lookup', 'checkout_address_1', 'checkout_address_2', 'checkout_city', 'checkout_postcode'].forEach(function (id) {
+            ['checkout_w3w_lookup', 'checkout_address_1', 'checkout_address_2', 'checkout_city', 'checkout_postcode', 'checkout_w3w_address'].forEach(function (id) {
                 var el = document.getElementById(id);
                 if (el) el.value = '';
             });
+            var w3wWrapper = document.getElementById('checkout-w3w-address-wrapper');
+            if (w3wWrapper) w3wWrapper.style.display = 'none';
         });
     });
 
     document.getElementById('w3w-input').addEventListener('swiftcomplete:swiftlookup:selected', function (e) {
         const lines = e.detail.result.populatedRecord.lines;
-        console.log(lines);
+        console.log(e.detail.result);
 
         if (lines[3].length > 0 && lines[4].length === 0) {
             if (lines[3].includes(', ')) {
@@ -71,6 +73,11 @@ function initSwiftcomplete() {
 
         document.getElementById('checkout_city').value = lines[4] || '';
         document.getElementById('checkout_postcode').value = lines[5] || '';
+
+        const w3wValue = lines[7] || '';
+        const w3wWrapper = document.getElementById('checkout-w3w-address-wrapper');
+        document.getElementById('checkout_w3w_address').value = w3wValue;
+        w3wWrapper.style.display = w3wValue ? '' : 'none';
 
         // country dropdown already reflects the user's selection; no change needed after result
 
