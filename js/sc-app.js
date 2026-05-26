@@ -1,4 +1,4 @@
-const SWIFTCOMPLETE_API_KEY = "322d46ce-6eaa-4d57-8fdf-c39d5ccb54c0";
+const SWIFTCOMPLETE_API_KEY = "4a08f54e-bb51-4af6-92a6-353ba227df1c";
 const SWIFTCOMPLETE_SEARCH_FIELD_ID = "w3w-input";
 
 function initialiseSwiftcomplete() {
@@ -41,7 +41,17 @@ function initSwiftcomplete() {
         control.groupBy('road,emptyroad');
         control.setMaxAutocompleteResults(5);
         control.setMaxContainerResults(100);
-        control.setCountries('gb');
+
+        const countrySelect = document.querySelector('select[name="country"]');
+        control.setCountries(countrySelect.value ? countrySelect.value.toLowerCase() : 'gb');
+
+        countrySelect.addEventListener('change', function () {
+            control.setCountries(this.value ? this.value.toLowerCase() : 'gb');
+            ['checkout_w3w_lookup', 'checkout_address_1', 'checkout_address_2', 'checkout_city', 'checkout_postcode'].forEach(function (id) {
+                var el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+        });
     });
 
     document.getElementById('w3w-input').addEventListener('swiftcomplete:swiftlookup:selected', function (e) {
@@ -62,13 +72,7 @@ function initSwiftcomplete() {
         document.getElementById('checkout_city').value = lines[4] || '';
         document.getElementById('checkout_postcode').value = lines[5] || '';
 
-        const countrySelect = document.querySelector('select[name="country"]');
-        if (lines[6] === 'United Kingdom') {
-            document.getElementById('checkout_country').value = lines[6];
-            countrySelect.value = 'GB';
-        } else {
-            document.getElementById('checkout_country').value = countrySelect.options[countrySelect.selectedIndex].text;
-        }
+        // country dropdown already reflects the user's selection; no change needed after result
 
         // Map SC's populated address lines into 2 inputs.
         // lines[1] = SubBuilding, BuildingName     (usually empty for residential UK)
