@@ -1,0 +1,248 @@
+/* ============================================================
+   what3words — Sales demo portal
+   styles.css  (compiled from styles.scss)
+
+   Design tokens live in `assets/colors_and_type.css`.
+   ============================================================ */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--w3w-white);
+  color: var(--w3w-navy-900);
+}
+
+.slashes-h {
+  color: var(--w3w-red);
+  letter-spacing: -0.04em;
+  margin-right: 4px;
+}
+
+/* ——— Section header ——— */
+.section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 64px 48px 96px;
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+.section-head .titles { max-width: 60ch; }
+.section-head .eyebrow { margin-bottom: 12px; display: block; }
+.section-head h2 {
+  margin: 0;
+  font-size: var(--fs-40);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.section-head p {
+  margin: 12px 0 0;
+  color: var(--w3w-gray-700);
+  font-size: var(--fs-18);
+}
+.section-head .meta {
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--w3w-gray-600);
+  white-space: nowrap;
+}
+
+/* ——— Demo grid ——— */
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+@media (max-width: 960px) {
+  .demo-grid { grid-template-columns: 1fr; }
+}
+
+/* ——— Demo card ——— */
+.demo-card {
+  background: var(--w3w-white);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+.demo-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 12px 30px rgba(10, 48, 73, 0.10),
+    0 2px 6px rgba(10, 48, 73, 0.06);
+  border-color: var(--w3w-gray-300);
+}
+.demo-card:hover .preview-frame { background: var(--w3w-gray-150); }
+.demo-card:hover .open-btn {
+  background: var(--w3w-red);
+  color: var(--w3w-white);
+  border-color: var(--w3w-red);
+}
+.demo-card:hover .open-btn .arrow { transform: translateX(3px); }
+
+/* ——— Preview frame ——— */
+.demo-card .preview-frame {
+  background: var(--w3w-gray-100);
+  padding: 28px 28px 0;
+  height: 240px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transition: background 180ms ease;
+  position: relative;
+  overflow: hidden;
+}
+.demo-card .preview-frame img {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 8px 8px 0 0;
+  box-shadow:
+    0 -4px 16px rgba(10, 48, 73, 0.12),
+    0 -1px 3px rgba(10, 48, 73, 0.06);
+  border: 1px solid var(--border-subtle);
+  border-bottom: none;
+  display: block;
+}
+
+/* ——— Lang chip ——— */
+.demo-card .lang-chip {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--w3w-white);
+  color: var(--w3w-navy-900);
+  border: 1px solid var(--border-default);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+}
+
+/* ——— Card body ——— */
+.demo-card .card-body {
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+.demo-card .card-body h3 {
+  margin: 0;
+  font-size: var(--fs-24);
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  font-weight: var(--fw-bold);
+}
+.demo-card .card-body h3 .slashes-h { margin-right: 4px; }
+.demo-card .card-body .blurb {
+  margin: 0;
+  color: var(--w3w-gray-700);
+  font-size: var(--fs-16);
+  line-height: var(--lh-relaxed);
+}
+
+/* ——— Talking points ——— */
+.demo-card .talking-points {
+  margin: 4px 0 0;
+  padding: 16px 0 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--border-subtle);
+}
+.demo-card .talking-points li {
+  font-size: var(--fs-14);
+  color: var(--w3w-gray-700);
+  line-height: 1.45;
+  padding-left: 22px;
+  position: relative;
+}
+.demo-card .talking-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 8px;
+  height: 8px;
+  background: var(--w3w-red);
+  border-radius: 1px;
+}
+
+/* ——— Card footer ——— */
+.demo-card .card-foot {
+  padding: 16px 28px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+.demo-card .card-foot .tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ——— Tag pill ——— */
+.tag {
+  font-size: var(--fs-12);
+  font-weight: var(--fw-semibold);
+  color: var(--w3w-gray-700);
+  background: var(--w3w-gray-100);
+  padding: 4px 10px;
+  border-radius: var(--radius-xs);
+  letter-spacing: 0.02em;
+}
+
+/* ——— Open demo button ——— */
+.open-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: var(--radius-xs);
+  background: var(--w3w-white);
+  color: var(--w3w-navy-900);
+  border: 1px solid var(--w3w-navy-900);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-14);
+  text-decoration: none;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
+}
+.open-btn .arrow {
+  display: inline-block;
+  transition: transform 160ms ease;
+}
+
+/* ——— Focus ——— */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--w3w-red);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}

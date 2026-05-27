@@ -1,0 +1,183 @@
+/* what3words — Colors & Type foundation
+   Sourced from the Web Design System Figma file.
+   Primary font: Source Sans 3 (business/web). Secondary: Source Sans Pro (legacy).
+*/
+
+/* Brand font — self-hosted variable Source Sans 3 */
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("fonts/SourceSans3-VariableFont_wght.ttf") format("truetype-variations"),
+       url("fonts/SourceSans3-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Supporting fonts — Roboto Mono for code. Source Sans Pro (legacy) falls back to Source Sans 3. */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap");
+
+:root {
+  /* ————— Brand colors ————— */
+  --w3w-red: rgb(225, 31, 38);            /* #E11F26 — primary brand, CTAs */
+  --w3w-red-dark: rgb(180, 18, 24);
+  --w3w-red-hover: rgb(200, 25, 30);
+
+  /* ————— Navy (core surface/text) ————— */
+  --w3w-navy-900: rgb(10, 48, 73);        /* #0A3049 — primary deep navy, hero surfaces, body text on light */
+  --w3w-navy-700: rgb(0, 83, 121);        /* #005379 — link, secondary navy */
+  --w3w-navy-500: rgb(24, 125, 185);      /* #187DB9 — accent/interactive blue */
+  --w3w-navy-400: rgb(0, 99, 151);        /* #006397 */
+  --w3w-navy-50:  rgb(219, 239, 250);     /* #DBEFFA — navy tint panel/bg */
+
+  /* ————— Neutrals ————— */
+  --w3w-white: rgb(255, 255, 255);
+  --w3w-black: rgb(0, 0, 0);
+  --w3w-ink:   rgb(26, 28, 30);           /* #1A1C1E — near-black text */
+
+  --w3w-gray-50:  rgb(249, 249, 252);     /* #F9F9FC — page bg */
+  --w3w-gray-100: rgb(242, 244, 245);     /* #F2F4F5 — surface/card bg */
+  --w3w-gray-150: rgb(237, 238, 240);
+  --w3w-gray-200: rgb(235, 235, 235);     /* #EBEBEB — divider */
+  --w3w-gray-250: rgb(226, 226, 229);
+  --w3w-gray-300: rgb(217, 217, 217);     /* #D9D9D9 — border */
+  --w3w-gray-350: rgb(214, 214, 214);
+  --w3w-gray-400: rgb(191, 191, 191);     /* #BFBFBF — disabled */
+  --w3w-gray-500: rgb(153, 153, 153);     /* #999999 */
+  --w3w-gray-600: rgb(97, 97, 97);        /* #616161 */
+  --w3w-gray-700: rgb(82, 82, 82);        /* #525252 — body, outline */
+  --w3w-gray-800: rgb(77, 77, 77);        /* #4D4D4D — disabled label */
+
+  /* ————— Accent / semantic ————— */
+  --w3w-coral:  rgb(242, 108, 80);        /* #F26C50 — warm accent */
+  --w3w-purple: rgb(151, 71, 255);        /* #9747FF — dev-annotation purple */
+  --w3w-yellow: rgb(246, 211, 31);        /* #F6D31F — warning */
+  --w3w-blue-info: rgb(10, 132, 255);     /* #0A84FF — info */
+
+  /* Semantic */
+  --fg-default:   var(--w3w-navy-900);
+  --fg-muted:     var(--w3w-gray-700);
+  --fg-subtle:    var(--w3w-gray-600);
+  --fg-disabled:  var(--w3w-gray-800);
+  --fg-on-dark:   var(--w3w-white);
+  --fg-link:      var(--w3w-navy-700);
+  --fg-accent:    var(--w3w-red);
+
+  --bg-page:      var(--w3w-white);
+  --bg-alt:       var(--w3w-gray-100);
+  --bg-surface:   var(--w3w-white);
+  --bg-dark:      var(--w3w-navy-900);
+  --bg-disabled:  var(--w3w-gray-400);
+
+  --border-default: var(--w3w-gray-300);
+  --border-strong:  var(--w3w-gray-700);
+  --border-subtle:  var(--w3w-gray-200);
+
+  /* ————— Type ————— */
+  --font-sans: "Source Sans 3", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-display: "Source Sans Pro", "Source Sans 3", system-ui, sans-serif; /* big hero/display numerals in DS */
+  --font-mono: "Roboto Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  /* Type scale — pulled from Figma usage counts (Source Sans 3 dominant) */
+  --fs-12: 12px;      /* caption, micro */
+  --fs-14: 14px;
+  --fs-16: 16px;      /* body */
+  --fs-18: 18px;
+  --fs-20: 20px;      /* subhead */
+  --fs-24: 24px;      /* h4 / large button label */
+  --fs-28: 28px;
+  --fs-30: 30px;
+  --fs-40: 40px;      /* h2 */
+  --fs-48: 48px;      /* h1 body */
+  --fs-64: 64px;
+  --fs-104: 104px;    /* hero display */
+  --fs-120: 120px;    /* mega display */
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-black: 900;
+
+  --lh-tight: 1.0;
+  --lh-snug:  1.2;
+  --lh-normal: 1.4;
+  --lh-relaxed: 1.5;
+
+  --ls-display: 0.01em;   /* ~0.64px at 120px */
+  --ls-button: 0;
+  --ls-caps: 0.09em;
+
+  /* ————— Radius / shadow / spacing ————— */
+  --radius-xs: 4px;        /* buttons, tags */
+  --radius-sm: 8px;        /* card chips, nav items */
+  --radius-md: 12px;
+  --radius-lg: 16px;       /* sheets, surfaces */
+  --radius-xl: 24px;
+  --radius-pill: 150px;
+
+  --elev-1: 0 1px 2px 0 rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+  --elev-2: 0 3px 1px 0 rgba(0,0,0,0.04), 0 3px 8px 0 rgba(0,0,0,0.12);
+  --elev-3: 0 0 30px 0 rgba(0,0,0,0.3);
+  --elev-hero: 0 0 46px 0 rgba(0,0,0,0.5);
+  --elev-subtle: 0 2px 6px rgba(10,48,73,0.08);
+
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-128: 128px;
+}
+
+/* ————— Semantic element styles ————— */
+html, body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-16);
+  line-height: var(--lh-normal);
+  color: var(--fg-default);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 { font-family: var(--font-sans); font-weight: var(--fw-bold); font-size: var(--fs-48); line-height: var(--lh-tight); letter-spacing: var(--ls-display); color: var(--fg-default); }
+h2 { font-family: var(--font-sans); font-weight: var(--fw-bold); font-size: var(--fs-40); line-height: var(--lh-snug); color: var(--fg-default); }
+h3 { font-family: var(--font-sans); font-weight: var(--fw-semibold); font-size: var(--fs-28); line-height: var(--lh-snug); color: var(--fg-default); }
+h4 { font-family: var(--font-sans); font-weight: var(--fw-semibold); font-size: var(--fs-24); line-height: var(--lh-snug); color: var(--fg-default); }
+h5 { font-family: var(--font-sans); font-weight: var(--fw-semibold); font-size: var(--fs-20); line-height: var(--lh-snug); color: var(--fg-default); }
+
+p  { font-size: var(--fs-16); line-height: var(--lh-relaxed); color: var(--fg-default); }
+small, .caption { font-size: var(--fs-12); color: var(--fg-muted); }
+
+.eyebrow {
+  font-size: var(--fs-14);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--w3w-red);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-104);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-caps);
+}
+
+code, pre, .mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-14);
+}
+
+a {
+  color: var(--fg-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+a:hover { color: var(--w3w-red); }
+
+/* The distinct /// slashes that prefix a what3words address */
+.slashes { color: var(--w3w-red); font-weight: var(--fw-bold); letter-spacing: -0.02em; }
