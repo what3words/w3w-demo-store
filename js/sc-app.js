@@ -19,10 +19,12 @@ function initialiseSwiftcomplete() {
 function initSwiftcomplete() {
     swiftcomplete.runWhenReady(() => {
         const searchField = document.getElementById(SWIFTCOMPLETE_SEARCH_FIELD_ID);
+        const pageLang = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
         swiftcomplete.controls[SWIFTCOMPLETE_SEARCH_FIELD_ID] = new swiftcomplete.SwiftLookup({
             field: searchField,
             key: SWIFTCOMPLETE_API_KEY,
             searchFor: "what3words,address",
+            language: pageLang,
             emptyQueryMode: 'prompt',
             scrollToFieldOnFocus: true,
             populateLineFormat: [
@@ -89,11 +91,16 @@ function initSwiftcomplete() {
         // First non-empty line  -> Address (line 1)
         // Anything else, joined -> Apartment, suite, etc. (line 2)
         const primaryLines = [lines[1], lines[2], lines[3]].filter(Boolean);
-        const addressLine1 = primaryLines.shift() || '';
-        const addressLine2 = primaryLines.join(', ');
+        const address2El = document.getElementById('checkout_address_2');
+        let addressLine1;
+        if (address2El) {
+            addressLine1 = primaryLines.shift() || '';
+            address2El.value = primaryLines.join(', ');
+        } else {
+            addressLine1 = primaryLines.join(', ');
+        }
 
         document.getElementById('checkout_address_1').value = addressLine1;
-        document.getElementById('checkout_address_2').value = addressLine2;
 
         document.getElementById('w3w-input').value = '';
     }, false);
