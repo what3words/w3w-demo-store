@@ -1,8 +1,0 @@
-// Legacy hardcoded override from the pre-Shopify demo layout, where the
-// lookup field happened to sit at y=391. Kept (scoped) so we don't risk
-// regressing the original /address-validator-form-posttag and other
-// pages that may visually depend on it. On the Shopify-style page we
-// let Swiftcomplete's own inline `top: …px` positioning take effect.
-body:not(.w3w-checkout--shopify) .swiftcompleteContainer {
-    //top: 391px !important;
-}
