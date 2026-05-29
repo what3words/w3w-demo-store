@@ -181,3 +181,5 @@ dist
 *.scss.map
 
 # End of https://www.toptal.com/developers/gitignore/api/node,macos,sass
+/docs/superpowers/
+.idea

@@ -1,0 +1,306 @@
+// ============================================================
+//  what3words — Sales demo portal
+//  styles.scss
+//
+//  Design tokens (colours, type scale, spacing, radii, shadows)
+//  live in `assets/colors_and_type.css` as CSS custom properties
+//  and are consumed below with var(--token-name).
+//
+//  Compile with:  sass styles.scss styles.css
+// ============================================================
+
+// ---------- SCSS variables (layout-only) ----------
+$page-max:      1280px;
+$page-gutter:   48px;
+$card-gap:      32px;
+$break-stack:   960px;
+$ease-out:      ease;
+$t-fast:        160ms;
+$t-card:        180ms;
+
+// ---------- Mixins ----------
+@mixin caps-label($size: var(--fs-12)) {
+  font-size: $size;
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+}
+
+@mixin red-square-bullet($size: 8px, $offset-top: 7px) {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: $offset-top;
+  width: $size;
+  height: $size;
+  background: var(--w3w-red);
+  border-radius: 1px;
+}
+
+// ============================================================
+//  Reset / base
+// ============================================================
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--w3w-white);
+  color: var(--w3w-navy-900);
+}
+
+// Brand accent — the red `///` mark
+.slashes-h {
+  color: var(--w3w-red);
+  letter-spacing: -0.04em;
+  margin-right: 4px;
+}
+
+// ============================================================
+//  Layout — section header
+// ============================================================
+.section {
+  max-width: $page-max;
+  margin: 0 auto;
+  padding: 64px $page-gutter 96px;
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: $card-gap;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+
+  .titles { max-width: 60ch; }
+
+  .eyebrow {
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: var(--fs-40);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    margin: 12px 0 0;
+    color: var(--w3w-gray-700);
+    font-size: var(--fs-18);
+  }
+
+  .meta {
+    @include caps-label(var(--fs-14));
+    color: var(--w3w-gray-600);
+    white-space: nowrap;
+  }
+}
+
+// ============================================================
+//  Demo grid
+// ============================================================
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $card-gap;
+
+  @media (max-width: $break-stack) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ============================================================
+//  Demo card
+// ============================================================
+.demo-card {
+  background: var(--w3w-white);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform     $t-card $ease-out,
+    box-shadow    $t-card $ease-out,
+    border-color  $t-card $ease-out;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 12px 30px rgba(10, 48, 73, 0.10),
+      0  2px  6px rgba(10, 48, 73, 0.06);
+    border-color: var(--w3w-gray-300);
+
+    .preview-frame { background: var(--w3w-gray-150); }
+
+    .open-btn {
+      background: var(--w3w-red);
+      color: var(--w3w-white);
+      border-color: var(--w3w-red);
+
+      .arrow { transform: translateX(3px); }
+    }
+  }
+
+  // ---- Preview thumbnail frame ----
+  .preview-frame {
+    background: var(--w3w-gray-100);
+    padding: 28px 28px 0;
+    height: 240px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    transition: background $t-card $ease-out;
+    position: relative;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      max-width: 380px;
+      border-radius: 8px 8px 0 0;
+      box-shadow:
+        0 -4px 16px rgba(10, 48, 73, 0.12),
+        0 -1px  3px rgba(10, 48, 73, 0.06);
+      border: 1px solid var(--border-subtle);
+      border-bottom: none;
+      display: block;
+    }
+  }
+
+  // ---- Lang chip in top-right of preview ----
+  .lang-chip {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--w3w-white);
+    color: var(--w3w-navy-900);
+    border: 1px solid var(--border-default);
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    @include caps-label(var(--fs-12));
+  }
+
+  // ---- Card body ----
+  .card-body {
+    padding: 28px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+
+    h3 {
+      margin: 0;
+      font-size: var(--fs-24);
+      line-height: 1.2;
+      letter-spacing: -0.005em;
+      font-weight: var(--fw-bold);
+
+      .slashes-h { margin-right: 4px; }
+    }
+
+    .blurb {
+      margin: 0;
+      color: var(--w3w-gray-700);
+      font-size: var(--fs-16);
+      line-height: var(--lh-relaxed);
+    }
+  }
+
+  // ---- Talking-points list ----
+  .talking-points {
+    margin: 4px 0 0;
+    padding: 16px 0 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid var(--border-subtle);
+
+    li {
+      font-size: var(--fs-14);
+      color: var(--w3w-gray-700);
+      line-height: 1.45;
+      padding-left: 22px;
+      position: relative;
+
+      &::before { @include red-square-bullet; }
+    }
+  }
+
+  // ---- Card footer ----
+  .card-foot {
+    padding: 16px 28px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-top: 1px solid var(--border-subtle);
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+// ============================================================
+//  Tags
+// ============================================================
+.tag {
+  font-size: var(--fs-12);
+  font-weight: var(--fw-semibold);
+  color: var(--w3w-gray-700);
+  background: var(--w3w-gray-100);
+  padding: 4px 10px;
+  border-radius: var(--radius-xs);
+  letter-spacing: 0.02em;
+}
+
+// ============================================================
+//  Primary "Open demo" button
+// ============================================================
+.open-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: var(--radius-xs);
+  background: var(--w3w-white);
+  color: var(--w3w-navy-900);
+  border: 1px solid var(--w3w-navy-900);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-14);
+  text-decoration: none;
+  transition:
+    background    $t-fast $ease-out,
+    color         $t-fast $ease-out,
+    border-color  $t-fast $ease-out;
+
+  .arrow {
+    display: inline-block;
+    transition: transform $t-fast $ease-out;
+  }
+}
+
+// ============================================================
+//  Focus state (accessibility)
+// ============================================================
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--w3w-red);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}

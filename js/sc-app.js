@@ -41,12 +41,24 @@ function initSwiftcomplete() {
         control.groupBy('road,emptyroad');
         control.setMaxAutocompleteResults(5);
         control.setMaxContainerResults(100);
-        control.setCountries('gb');
+
+        const countrySelect = document.querySelector('select[name="country"]');
+        control.setCountries(countrySelect.value ? countrySelect.value.toLowerCase() : 'gb');
+
+        countrySelect.addEventListener('change', function () {
+            control.setCountries(this.value ? this.value.toLowerCase() : 'gb');
+            ['checkout_w3w_lookup', 'checkout_address_1', 'checkout_address_2', 'checkout_city', 'checkout_postcode', 'checkout_w3w_address'].forEach(function (id) {
+                var el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+            var w3wWrapper = document.getElementById('checkout-w3w-address-wrapper');
+            if (w3wWrapper) w3wWrapper.style.display = 'none';
+        });
     });
 
     document.getElementById('w3w-input').addEventListener('swiftcomplete:swiftlookup:selected', function (e) {
         const lines = e.detail.result.populatedRecord.lines;
-        console.log(lines);
+        console.log(e.detail.result);
 
         if (lines[3].length > 0 && lines[4].length === 0) {
             if (lines[3].includes(', ')) {
@@ -59,33 +71,29 @@ function initSwiftcomplete() {
             }
         }
 
-        document.getElementById('checkout_company').value = lines[0] || '';
         document.getElementById('checkout_city').value = lines[4] || '';
         document.getElementById('checkout_postcode').value = lines[5] || '';
 
-        const countrySelect = document.querySelector('select[name="country"]');
-        if (lines[6] === 'United Kingdom') {
-            document.getElementById('checkout_country').value = lines[6];
-            countrySelect.value = 'GB';
-        } else {
-            document.getElementById('checkout_country').value = countrySelect.options[countrySelect.selectedIndex].text;
-        }
+        const w3wValue = lines[7] || '';
+        const w3wWrapper = document.getElementById('checkout-w3w-address-wrapper');
+        document.getElementById('checkout_w3w_address').value = w3wValue;
+        w3wWrapper.style.display = w3wValue ? '' : 'none';
 
-        document.getElementById('checkout_w3w').value = lines[7] || '';
+        // country dropdown already reflects the user's selection; no change needed after result
 
-        let addressLines = lines.splice(1, 3).filter(item => item.length > 0);
-        if (addressLines.length > 3) {
-            addressLines[2] += ', ' + addressLines[3];
-            addressLines.length = 3;
-        }
+        // Map SC's populated address lines into 2 inputs.
+        // lines[1] = SubBuilding, BuildingName     (usually empty for residential UK)
+        // lines[2] = BuildingNumber + Road + PoBox (the typical "main street" line)
+        // lines[3] = TertiaryLocality, SecondaryLocality
+        //
+        // First non-empty line  -> Address (line 1)
+        // Anything else, joined -> Apartment, suite, etc. (line 2)
+        const primaryLines = [lines[1], lines[2], lines[3]].filter(Boolean);
+        const addressLine1 = primaryLines.shift() || '';
+        const addressLine2 = primaryLines.join(', ');
 
-        document.getElementById('checkout_address_1').value = '';
-        document.getElementById('checkout_address_2').value = '';
-        document.getElementById('checkout_address_3').value = '';
-
-        addressLines.forEach((line, index) => {
-            document.getElementById('checkout_address_' + (index + 1)).value = line;
-        });
+        document.getElementById('checkout_address_1').value = addressLine1;
+        document.getElementById('checkout_address_2').value = addressLine2;
 
         document.getElementById('w3w-input').value = '';
     }, false);
@@ -93,3 +101,26 @@ function initSwiftcomplete() {
 
 window.addEventListener("load", initialiseSwiftcomplete, false);
 window.addEventListener("load", initSwiftcomplete, false);
+
+/**
+ * Toggle the `.cs-radio--selected` class on the parent <fieldset> when a
+ * radio in `name=<radioGroup>` changes. Lets the Shopify-style payment +
+ * shipping panels expand/collapse purely via CSS.
+ */
+function bindRadioGroup(radioGroup) {
+    const radios = document.querySelectorAll(`input[type="radio"][name="${radioGroup}"]`);
+    radios.forEach(function (radio) {
+        radio.addEventListener('change', function () {
+            const groupKey = radioGroup.replace('_method', '');
+            const groupFieldsets = document.querySelectorAll('fieldset[data-radio="' + groupKey + '"]');
+            groupFieldsets.forEach(function (fs) { fs.classList.remove('cs-radio--selected'); });
+            const owner = radio.closest('fieldset');
+            if (owner) owner.classList.add('cs-radio--selected');
+        });
+    });
+}
+
+window.addEventListener('load', function () {
+    bindRadioGroup('payment_method');
+    bindRadioGroup('shipping_method');
+}, false);

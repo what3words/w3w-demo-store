@@ -4,7 +4,6 @@
     padding: 1rem 4rem;
     position: relative;
     z-index: 5;
-    font-weight: 300;
     @include box-sizing(border-box);
     @include border-radius(0);
     background: $red;

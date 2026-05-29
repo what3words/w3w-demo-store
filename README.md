@@ -1,44 +1,83 @@
-# What3words Demo Store
+# what3words — Sales demo portal
 
-This repository contains the checkout page of an E-commerce site designed exclusively for demo purposes.
+A static site used by the BD/sales team to demo what3words integrations to prospective customers. Served live at [demo-store.what3words.com](https://demo-store.what3words.com).
 
-## Getting Started
+## Demos
 
-To set up the project locally, follow these steps:
+| Page | File | Integration |
+|------|------|-------------|
+| Checkout | `checkout.html` | jQuery + w3w autosuggest plugin |
+| Address validator | `address-validator-form.html` | Swiftcomplete (`js/sc-app.js`) |
+| Delivery instructions — LTR | `delivery-notes.html` | what3words web component |
+| Delivery instructions — RTL | `delivery-notes-rtl.html` | what3words web component |
 
-### Install Dependencies
+## Getting started
 
-If you’re running the project for the first time, install the necessary JavaScript packages by running:
+```bash
+npm install
+npm start        # serves the site at http://localhost:4000
+```
 
-    npm install
+Sass is included as a dev dependency — no global install needed.
 
-### Start the Project
+## Editing styles
 
-Once dependencies are installed, you can start the project using:
+There are two separate stylesheets:
 
-    npm start
+**Demo pages** (`checkout.html`, `delivery-notes*.html`, `address-validator-form.html`)
 
-### Setting Up Styles with Sass
+Source lives in `css/scss/`. Compile with:
 
-This project uses Sass for styling. Ensure you have Sass installed globally to compile .scss files into .css.
+```bash
+npm run build:css
+# or watch during development:
+npm run watch:css
+```
 
-To install Sass globally, run:
+The compiled `css/styles.css` is committed — no CI build step.
 
-    npm install -g sass
+**Homepage** (`index.html`)
 
-### Compile Sass Stylesheets
+Source lives in `styles.scss` at the repo root. Compile with:
 
-After making changes to the Sass files or if running the project for the first time, compile the main Sass file into CSS by running:
+```bash
+sass styles.scss styles.css
+```
 
-    sass css/scss/styles.scss css/styles.css
+Design tokens (colours, type, spacing) are in `assets/colors_and_type.css` as CSS custom properties and are shared across the homepage and its card components.
 
-This command will create or update styles.css in the css directory, ensuring the project has the latest compiled styles.
+## Development mode
 
-### Additional Notes
+To run the server and watch demo-page SCSS simultaneously:
 
-- Development Mode: Ensure sass --watch is running for automatic compilation during development. You can do this with:
+```bash
+npm run dev
+```
 
-        sass --watch css/scss/styles.scss css/styles.css
+## Project structure
 
-- What3words Integration: This project integrates what3words API functionality, allowing users to validate and convert traditional addresses and what3words addresses.
+```
+index.html                  — demo portal homepage (card grid)
+checkout.html               — Checkout demo
+address-validator-form.html — Address validator demo (Swiftcomplete)
+delivery-notes.html         — Delivery instructions demo (LTR)
+delivery-notes-rtl.html     — Delivery instructions demo (RTL)
 
+assets/
+  colors_and_type.css       — design tokens (CSS custom properties)
+  fonts/                    — Source Sans 3 variable font
+  thumbs/                   — homepage card screenshots
+
+css/
+  scss/                     — SCSS source for demo pages
+  styles.css                — compiled output (committed)
+
+images/                     — favicon and UI icons
+
+js/
+  app.js                    — jQuery w3w autosuggest (checkout / delivery-notes)
+  sc-app.js                 — Swiftcomplete integration (address-validator-form)
+  vendor/                   — bundled third-party scripts
+
+styles.scss / styles.css    — homepage-only styles (compiled, committed)
+```

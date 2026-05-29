@@ -1,63 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>what3words demo store - E-commerce</title>
-    <link rel="icon" type="image/png" href="/images/favicon_logo.png" />
-    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
-    <style>
-        h2 {
-            margin: 10px;
-        }
-
-        ul {
-            list-style-type: none;
-            margin: 0 10px;
-            padding: 20px 0;
-            width: 500px;
-            background-color: #f1f1f1;
-        }
-
-        li a {
-            display: block;
-            color: #000;
-            padding: 8px 16px;
-            text-decoration: none;
-        }
-
-        /* Change the link color on hover */
-        li a:hover {
-            background-color: #555;
-            color: white;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>what3words — Sales demo portal</title>
+  <link rel="stylesheet" href="assets/colors_and_type.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
+<body>
 
-<body class="w3w-checkout" data-new-gr-c-s-check-loaded="8.910.0" data-gr-ext-installed=""
-    data-new-gr-c-s-loaded="8.910.0">
-    <div class="list_of_demo_links">
-        <h2>what3words Demo Stores</h2>
-        <ul class="demo_links">
-            <li>
-                <a href="checkout">Checkout - Demo site</a>
-            </li>
-            <li>
-                <a href="delivery-notes">Delivery notes (textarea) LTR - Demo site</a>
-            </li>
-            <li>
-                <a href="delivery-notes-rtl">Delivery notes (textarea) RTL - Demo site</a>
-            </li>
-            <!-- <li>
-                    <a href="delivery-notes-input.html">Delivery notes (input) - Demo site</a>
-                </li> -->
-            <li>
-                <a href="address-validator-form">Address Validator - Demo site</a>
-            </li>
-        </ul>
+  <section class="section" id="demos">
+    <div class="section-head">
+      <div class="titles">
+        <span class="eyebrow">Demos</span>
+        <h2>Pick a flow to walk a customer through</h2>
+      </div>
+      <div class="meta">Last updated · May 2026</div>
     </div>
-</body>
 
+    <div class="demo-grid">
+
+      <a class="demo-card" href="checkout.html">
+        <div class="preview-frame">
+          <span class="lang-chip">Modern checkout</span>
+          <img src="assets/thumbs/checkout.png" alt="Checkout demo screenshot" />
+        </div>
+        <div class="card-body">
+          <h3><span class="slashes-h">///</span>Checkout</h3>
+          <p class="blurb">A Shopify-style single-page checkout where the address field accepts a postcode, a free-form address, <em>or</em> a three-word address — switching between them is invisible to the shopper.</p>
+        </div>
+        <div class="card-foot">
+          <div class="tags">
+            <span class="tag">Autosuggest</span>
+            <span class="tag">E-commerce</span>
+          </div>
+          <span class="open-btn">Open demo <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <a class="demo-card" href="address-validator-form.html">
+        <div class="preview-frame">
+          <span class="lang-chip">Standalone tool</span>
+          <img src="assets/thumbs/address-validator.png" alt="Address validator demo screenshot" />
+        </div>
+        <div class="card-body">
+          <h3><span class="slashes-h">///</span>Address validator</h3>
+          <p class="blurb">A full checkout-style form that verifies the address as the shopper types, with an optional what3words field for hard-to-find delivery points.</p>
+        </div>
+        <div class="card-foot">
+          <div class="tags">
+            <span class="tag">Validation</span>
+            <span class="tag">Retail</span>
+          </div>
+          <span class="open-btn">Open demo <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <a class="demo-card" href="delivery-notes.html">
+        <div class="preview-frame">
+          <span class="lang-chip">English · LTR</span>
+          <img src="assets/thumbs/delivery-notes-ltr.png" alt="Delivery notes LTR demo screenshot" />
+        </div>
+        <div class="card-body">
+          <h3><span class="slashes-h">///</span>Delivery instructions — LTR</h3>
+          <p class="blurb">A "Delivery instructions" textarea that auto-detects a three-word address typed inline, validates it, and stores it alongside the order — no UI change required from the merchant.</p>
+
+        </div>
+        <div class="card-foot">
+          <div class="tags">
+            <span class="tag">Textarea</span>
+            <span class="tag">Lightweight</span>
+          </div>
+          <span class="open-btn">Open demo <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <a class="demo-card" href="delivery-notes-rtl.html">
+        <div class="preview-frame">
+          <span class="lang-chip">Arabic · RTL</span>
+          <img src="assets/thumbs/delivery-notes-rtl.png" alt="Delivery notes RTL demo screenshot" />
+        </div>
+        <div class="card-body">
+          <h3><span class="slashes-h">///</span>Delivery instructions — RTL</h3>
+          <p class="blurb">The same textarea integration in a right-to-left layout for Arabic-speaking markets — proving the component handles bidirectional text and mirrored layouts correctly.</p>
+        </div>
+        <div class="card-foot">
+          <div class="tags">
+            <span class="tag">RTL</span>
+            <span class="tag">i18n</span>
+          </div>
+          <span class="open-btn">Open demo <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+</body>
 </html>
