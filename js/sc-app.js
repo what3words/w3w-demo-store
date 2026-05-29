@@ -1,4 +1,4 @@
-const SWIFTCOMPLETE_API_KEY = "4a08f54e-bb51-4af6-92a6-353ba227df1c";
+const SWIFTCOMPLETE_API_KEY = "322d46ce-6eaa-4d57-8fdf-c39d5ccb54c0";
 const SWIFTCOMPLETE_SEARCH_FIELD_ID = "w3w-input";
 
 function initialiseSwiftcomplete() {
@@ -115,7 +115,7 @@ window.addEventListener("load", initSwiftcomplete, false);
  * shipping panels expand/collapse purely via CSS.
  */
 function bindRadioGroup(radioGroup) {
-    const radios = document.querySelectorAll('input[type="radio"][name="' + radioGroup + '"]');
+    const radios = document.querySelectorAll(`input[type="radio"][name="${radioGroup}"]`);
     radios.forEach(function (radio) {
         radio.addEventListener('change', function () {
             const groupKey = radioGroup.replace('_method', '');
