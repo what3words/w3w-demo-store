@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>what3words demo store - E-commerce (DE)</title>
+    <link rel="icon" type="image/png" href="/images/favicon_logo.png">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+
+<body class="w3w-checkout w3w-checkout--shopify" data-new-gr-c-s-check-loaded="8.910.0" data-gr-ext-installed=""
+      data-new-gr-c-s-loaded="8.910.0">
+<div id="geoloc"></div>
+<main class="wrapper">
+    <a href="/" class="button-back"> << Zurück</a>
+    <form id="checkout-form" name="checkout" onsubmit="event.preventDefault();">
+        <!-- Left column: customer details -->
+        <div class="checkout-left">
+
+            <!-- ── Contact ─────────────────────────────── -->
+            <section class="cs-section">
+                <header class="cs-section__head">
+                    <h2>Kontakt</h2>
+                    <a href="#" class="cs-section__link">Anmelden</a>
+                </header>
+                <div class="ff">
+                    <input id="checkout_email" name="checkout_email" type="email"
+                           placeholder=" " autocomplete="email" required>
+                    <label for="checkout_email">E-Mail oder Mobiltelefonnummer</label>
+                </div>
+            </section>
+
+            <!-- ── Delivery ────────────────────────────── -->
+            <section class="cs-section">
+                <h2>Lieferung</h2>
+
+                <!-- Swiftcomplete address lookup -->
+                <div class="ff has-icon" id="checkout-what3words-input">
+                    <input id="w3w-input" name="checkout_w3w_lookup" type="text" placeholder=" " autocomplete="off">
+                    <label for="w3w-input">Adresse, what3words oder Postleitzahl eingeben</label>
+                    <img class="ff-icon" src="/images/icons/search.svg" alt="">
+                </div>
+
+                <!-- what3words address (populated when a w3w suggestion is selected) -->
+                <div class="ff" id="checkout-w3w-address-wrapper" style="display:none">
+                    <input id="checkout_w3w_address" name="checkout_w3w_address" type="text" placeholder=" " readonly>
+                    <label for="checkout_w3w_address">what3words-Adresse</label>
+                </div>
+
+                <!-- Country (locked to Germany) -->
+                <div class="ff has-icon">
+                    <select id="checkout_country" name="country">
+                        <option value="DE" selected="selected">Deutschland</option>
+                    </select>
+                    <label for="checkout_country">Land/Region</label>
+                </div>
+
+                <!-- Names -->
+                <div class="row-2">
+                    <div class="ff">
+                        <input id="checkout_first_name" name="checkout_first_name" type="text"
+                               placeholder=" " autocomplete="given-name">
+                        <label for="checkout_first_name">Vorname (optional)</label>
+                    </div>
+                    <div class="ff">
+                        <input id="checkout_last_name" name="checkout_last_name" type="text"
+                               placeholder=" " autocomplete="family-name" required>
+                        <label for="checkout_last_name">Nachname</label>
+                    </div>
+                </div>
+
+                <!-- Address (single line — German addresses) -->
+                <div class="ff has-icon">
+                    <input id="checkout_address_1" name="checkout_address_1" type="text"
+                           placeholder=" " autocomplete="address-line1" required>
+                    <label for="checkout_address_1">Adresse</label>
+                    <img class="ff-icon" src="/images/icons/search.svg" alt="">
+                </div>
+
+                <!-- Postcode | City (DE order) -->
+                <div class="row-2">
+                    <div class="ff">
+                        <input id="checkout_postcode" name="checkout_postcode" type="text"
+                               placeholder=" " autocomplete="postal-code">
+                        <label for="checkout_postcode">Postleitzahl</label>
+                    </div>
+                    <div class="ff">
+                        <input id="checkout_city" name="checkout_city" type="text"
+                               placeholder=" " autocomplete="address-level2" required>
+                        <label for="checkout_city">Stadt</label>
+                    </div>
+                </div>
+
+                <label class="cs-check">
+                    <input type="checkbox" name="save_info">
+                    <span>Diese Informationen für das nächste Mal speichern</span>
+                </label>
+            </section>
+
+            <!-- ── Shipping method ─────────────────────── -->
+            <section class="cs-section">
+                <h2>Versandart</h2>
+                <fieldset class="cs-radio cs-radio--selected" data-radio="shipping">
+                    <label class="cs-radio__row">
+                        <input type="radio" name="shipping_method" value="economy" checked>
+                        <span class="cs-radio__label">Sparversand</span>
+                        <span class="cs-radio__price">KOSTENLOS</span>
+                    </label>
+                </fieldset>
+                <fieldset class="cs-radio" data-radio="shipping">
+                    <label class="cs-radio__row">
+                        <input type="radio" name="shipping_method" value="standard">
+                        <span class="cs-radio__label">Standard</span>
+                        <span class="cs-radio__price">7,90 €</span>
+                    </label>
+                </fieldset>
+            </section>
+
+            <!-- ── Payment ─────────────────────────────── -->
+            <section class="cs-section">
+                <h2>Zahlung</h2>
+                <p class="cs-section__sub">Alle Transaktionen sind sicher und verschlüsselt.</p>
+
+                <fieldset class="cs-radio cs-radio--selected" data-radio="payment">
+                    <label class="cs-radio__row">
+                        <input type="radio" name="payment_method" value="card" checked/>
+                        <span class="cs-radio__label">Kredit-/Debitkarte</span>
+                        <span class="cs-brands">
+                  <img class="cs-brand-img" src="/images/icons/visa.svg" alt="Visa"/>
+                  <img class="cs-brand-img" src="/images/icons/mastercard.svg" alt="Mastercard"/>
+                    <img class="cs-brand-img" src="/images/icons/applepay.svg" alt="Apple Pay"/>
+                            <img class="cs-brand-img" src="/images/icons/ggpay.svg" alt="Google Pay"/>
+                  <span class="cs-brand">+5</span>
+                </span>
+                    </label>
+                    <div class="cs-radio__body">
+                        <div class="ff has-icon">
+                            <input id="cc_number" name="cc_number" type="text"
+                                   placeholder=" " inputmode="numeric" autocomplete="cc-number">
+                            <label for="cc_number">Kartennummer</label>
+                            <img class="ff-icon" src="/images/icons/lock.svg" alt=""/>
+                        </div>
+                        <div class="row-2">
+                            <div class="ff">
+                                <input id="cc_exp" name="cc_exp" type="text"
+                                       placeholder=" " inputmode="numeric" autocomplete="cc-exp">
+                                <label for="cc_exp">Ablaufdatum (MM / JJ)</label>
+                            </div>
+                            <div class="ff has-icon">
+                                <input id="cc_cvc" name="cc_cvc" type="text"
+                                       placeholder=" " inputmode="numeric" autocomplete="cc-csc">
+                                <label for="cc_cvc">Sicherheitscode</label>
+                                <img class="ff-icon" src="/images/icons/help.svg" alt=""/>
+                            </div>
+                        </div>
+                        <div class="ff">
+                            <input id="cc_name" name="cc_name" type="text"
+                                   placeholder=" " autocomplete="cc-name">
+                            <label for="cc_name">Name auf der Karte</label>
+                        </div>
+                        <label class="cs-check">
+                            <input type="checkbox" id="billing_same" checked>
+                            <span>Lieferadresse als Rechnungsadresse verwenden</span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <fieldset class="cs-radio" data-radio="payment">
+                    <label class="cs-radio__row">
+                        <input type="radio" name="payment_method" value="paypal">
+                        <span class="cs-radio__label">PayPal</span>
+                        <span class="cs-brands">
+                  <img class="cs-brand-img" src="/images/icons/paypal.png" alt="PayPal">
+                </span>
+                    </label>
+                </fieldset>
+
+                <label class="cs-check cs-check--terms">
+                    <input type="checkbox" name="terms" required>
+                    <span>Ich habe die Allgemeinen Geschäftsbedingungen gelesen und akzeptiere sie</span>
+                </label>
+
+                <button type="submit" class="cs-place-order">Bestellung aufgeben</button>
+            </section>
+        </div>
+
+        <!-- Right column: order summary -->
+        <aside class="checkout-right">
+            <div class="cs-summary">
+                <ul class="cs-summary__items">
+                    <li>
+                        <div class="cs-summary__thumb"><span class="cs-summary__qty">1</span></div>
+                        <span class="cs-summary__name">Armbanduhr</span>
+                        <span class="cs-summary__price">250,00 €</span>
+                    </li>
+                    <li>
+                        <div class="cs-summary__thumb"><span class="cs-summary__qty">1</span></div>
+                        <span class="cs-summary__name">Digitaluhr</span>
+                        <span class="cs-summary__price">250,00 €</span>
+                    </li>
+                </ul>
+
+                <div class="cs-summary__gift">
+                    <div class="ff">
+                        <input id="gift_card" name="gift_card" type="text" placeholder=" ">
+                        <label for="gift_card">Geschenkkarte</label>
+                    </div>
+                    <button type="button" class="cs-summary__apply">Anwenden</button>
+                </div>
+
+                <dl class="cs-summary__totals">
+                    <div>
+                        <dt>Zwischensumme <span class="cs-summary__sub">· 2 Artikel</span></dt>
+                        <dd>500,00 €</dd>
+                    </div>
+                    <div>
+                        <dt>Versand</dt>
+                        <dd>KOSTENLOS</dd>
+                    </div>
+                    <div class="cs-summary__total">
+                        <dt>Gesamtsumme</dt>
+                        <dd><span class="cs-summary__currency">EUR</span> <strong>500,00 €</strong></dd>
+                    </div>
+                </dl>
+            </div>
+        </aside>
+    </form>
+</main>
+<script>!function (e, t, c) {
+    e.swiftcomplete = e.swiftcomplete || {};
+    var s = t.createElement("script");
+    s.async = !0, s.src = c;
+    var r = t.getElementsByTagName("script")[0];
+    r.parentNode.insertBefore(s, r)
+}(window, document, "https://assets.swiftcomplete.com/js/swiftlookup.js");
+</script>
+<script type="text/javascript" src="/js/sc-app.js"></script>
+</body>
+
+</html>
