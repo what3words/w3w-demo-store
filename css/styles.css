@@ -2328,17 +2328,19 @@ body.w3w-checkout--shopify #checkout-form {
   }
 }
 
-/* ── Override legacy #w3w-input rules from _main.scss ── */
-/* `_main.scss` ships `#w3w-input { padding: 10px 25px; ... }` for the
-   pre-Shopify demo layout. Specificity (1,0,0) beats our `.ff > input`
-   (0,1,1), so we re-state the .ff input contract here with the id boost.
-   Scoped to --shopify so the other demo pages keep their #w3w-input. */
-body.w3w-checkout--shopify .ff > #w3w-input {
-  padding: 18px 40px 4px 12px;
-  border: 1px solid #c9cccf;
-  border-radius: 6px;
-  font-size: 16px;
-  box-sizing: border-box;
+/* ── Swiftcomplete web component ───────────────── */
+/* It renders its own input in a shadow root, so the .ff floating label
+   can't reach it — the component's own placeholder stands in. These vars
+   line the host up with the .ff inputs above and below it. */
+swiftcomplete-search {
+  display: block;
+  margin-bottom: 12px;
+  --swiftcomplete-padding: 18px;
+  --swiftcomplete-input-border: 1px solid #c9cccf;
+  --swiftcomplete-input-border-radius: 6px;
+  --swiftcomplete-focus-border-color: #659be6;
+  --swiftcomplete-primary-text-color: #1a1a1a;
+  --swiftcomplete-secondary-text-color: #6b7177;
 }
 
 /* ── Section primitives ────────────────────────── */
