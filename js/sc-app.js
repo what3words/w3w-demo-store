@@ -1,9 +1,24 @@
 const SWIFTCOMPLETE_API_KEY = "322d46ce-6eaa-4d57-8fdf-c39d5ccb54c0";
-const SWIFTCOMPLETE_SEARCH_FIELD_ID = "w3w-input";
+const SWIFTCOMPLETE_SEARCH_ELEMENT_ID = "sc-address-search";
+// The component ships with debounce off (0), i.e. one request per keystroke —
+// which is what overflowed the API's per-key queue for Tile Mountain (TT-10697).
+const SWIFTCOMPLETE_DEBOUNCE_MS = 300;
+
+// Keys are ours; `format` is the Swiftcomplete line format, `fieldId` the input
+// the component writes that line into on selection.
+const SWIFTCOMPLETE_FIELDS = {
+    company: 'Company',
+    addressLine1: { fieldId: 'checkout_address_1', format: 'AddressLine1' },
+    addressLine2: { fieldId: 'checkout_address_2', format: 'AddressLine2' },
+    city: { fieldId: 'checkout_city', format: 'TertiaryLocality, SecondaryLocality, PrimaryLocality' },
+    postalCode: { fieldId: 'checkout_postcode', format: 'POSTCODE' },
+    country: 'PrimaryCountry',
+    what3words: { fieldId: 'checkout_w3w_address', format: 'what3words' }
+};
 
 function initialiseSwiftcomplete() {
     const credits = document.getElementById('credits');
-    
+
     if (credits) {
         credits.onchange = function() {
             const elements = document.querySelectorAll('[data-credits]');
@@ -16,94 +31,57 @@ function initialiseSwiftcomplete() {
     }
 }
 
-function initSwiftcomplete() {
-    swiftcomplete.runWhenReady(() => {
-        const searchField = document.getElementById(SWIFTCOMPLETE_SEARCH_FIELD_ID);
-        const pageLang = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
-        swiftcomplete.controls[SWIFTCOMPLETE_SEARCH_FIELD_ID] = new swiftcomplete.SwiftLookup({
-            field: searchField,
-            key: SWIFTCOMPLETE_API_KEY,
-            searchFor: "what3words,address",
-            language: pageLang,
-            emptyQueryMode: 'prompt',
-            scrollToFieldOnFocus: true,
-            populateLineFormat: [
-                { format: 'Company' },
-                { format: 'SubBuilding, BuildingName' },
-                { format: 'BuildingNumber SecondaryRoad, Road, PoBox' },
-                { format: 'TertiaryLocality, SecondaryLocality' },
-                { format: 'PrimaryLocality' },
-                { format: 'POSTCODE' },
-                { format: 'PrimaryCountry' },
-                { format: 'what3words' }
-            ]
+function clearAddressFields(search) {
+    ['checkout_address_1', 'checkout_address_2', 'checkout_city', 'checkout_postcode', 'checkout_w3w_address']
+        .forEach(function (id) {
+            const el = document.getElementById(id);
+            if (el) el.value = '';
         });
+    document.getElementById('checkout-w3w-address-wrapper').style.display = 'none';
+    search.getInput().value = '';
+}
 
-        const control = swiftcomplete.controls[SWIFTCOMPLETE_SEARCH_FIELD_ID];
-        control.groupBy('road,emptyroad');
-        control.setMaxAutocompleteResults(5);
-        control.setMaxContainerResults(100);
+function initSwiftcomplete() {
+    const search = document.getElementById(SWIFTCOMPLETE_SEARCH_ELEMENT_ID);
+    const countrySelect = document.querySelector('select[name="country"]');
 
-        const countrySelect = document.querySelector('select[name="country"]');
-        control.setCountries(countrySelect.value ? countrySelect.value.toLowerCase() : 'gb');
+    window.swiftcomplete.runWhenReady(function (service) {
+        service.setApiKey(SWIFTCOMPLETE_API_KEY);
+        service.setSearchFor('what3words', 'address');
+        service.setDebounce(SWIFTCOMPLETE_DEBOUNCE_MS);
+        service.setEnableSearchOnEmptySearch(true);
+        service.setCountry((countrySelect.value || 'GB').toLowerCase());
+
+        // The DE page has no "Apartment, suite" input, so we join both address
+        // lines into line 1 ourselves below. Drop the fieldIds for both: the
+        // component writes its own fields *after* dispatching select, so
+        // leaving line 1 mapped would overwrite what we just wrote.
+        const hasAddressLine2 = !!document.getElementById('checkout_address_2');
+        const fields = Object.assign({}, SWIFTCOMPLETE_FIELDS);
+        if (!hasAddressLine2) {
+            fields.addressLine1 = SWIFTCOMPLETE_FIELDS.addressLine1.format;
+            fields.addressLine2 = SWIFTCOMPLETE_FIELDS.addressLine2.format;
+        }
+        search.populateFields(fields);
+
+        search.addEventListener(window.swiftcomplete.SearchEvents.Select, function (e) {
+            // Every other field is filled by the component via `fields`.
+            const selected = e.detail.selected;
+
+            if (!hasAddressLine2) {
+                document.getElementById('checkout_address_1').value =
+                    [selected.addressLine1, selected.addressLine2].filter(Boolean).join(', ');
+            }
+
+            document.getElementById('checkout-w3w-address-wrapper').style.display =
+                selected.what3words ? '' : 'none';
+        });
 
         countrySelect.addEventListener('change', function () {
-            control.setCountries(this.value ? this.value.toLowerCase() : 'gb');
-            ['checkout_w3w_lookup', 'checkout_address_1', 'checkout_address_2', 'checkout_city', 'checkout_postcode', 'checkout_w3w_address'].forEach(function (id) {
-                var el = document.getElementById(id);
-                if (el) el.value = '';
-            });
-            var w3wWrapper = document.getElementById('checkout-w3w-address-wrapper');
-            if (w3wWrapper) w3wWrapper.style.display = 'none';
+            service.setCountry((this.value || 'GB').toLowerCase());
+            clearAddressFields(search);
         });
     });
-
-    document.getElementById('w3w-input').addEventListener('swiftcomplete:swiftlookup:selected', function (e) {
-        const lines = e.detail.result.populatedRecord.lines;
-        console.log(e.detail.result);
-
-        if (lines[3].length > 0 && lines[4].length === 0) {
-            if (lines[3].includes(', ')) {
-                const splitLine = lines[3].split(', ');
-                lines[3] = splitLine[splitLine.length - 2];
-                lines[4] = splitLine[splitLine.length - 1];
-            } else {
-                lines[4] = lines[3];
-                lines[3] = '';
-            }
-        }
-
-        document.getElementById('checkout_city').value = lines[4] || '';
-        document.getElementById('checkout_postcode').value = lines[5] || '';
-
-        const w3wValue = lines[7] || '';
-        const w3wWrapper = document.getElementById('checkout-w3w-address-wrapper');
-        document.getElementById('checkout_w3w_address').value = w3wValue;
-        w3wWrapper.style.display = w3wValue ? '' : 'none';
-
-        // country dropdown already reflects the user's selection; no change needed after result
-
-        // Map SC's populated address lines into 2 inputs.
-        // lines[1] = SubBuilding, BuildingName     (usually empty for residential UK)
-        // lines[2] = BuildingNumber + Road + PoBox (the typical "main street" line)
-        // lines[3] = TertiaryLocality, SecondaryLocality
-        //
-        // First non-empty line  -> Address (line 1)
-        // Anything else, joined -> Apartment, suite, etc. (line 2)
-        const primaryLines = [lines[1], lines[2], lines[3]].filter(Boolean);
-        const address2El = document.getElementById('checkout_address_2');
-        let addressLine1;
-        if (address2El) {
-            addressLine1 = primaryLines.shift() || '';
-            address2El.value = primaryLines.join(', ');
-        } else {
-            addressLine1 = primaryLines.join(', ');
-        }
-
-        document.getElementById('checkout_address_1').value = addressLine1;
-
-        document.getElementById('w3w-input').value = '';
-    }, false);
 }
 
 window.addEventListener("load", initialiseSwiftcomplete, false);

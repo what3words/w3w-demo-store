@@ -37,12 +37,9 @@
             <section class="cs-section">
                 <h2>Delivery</h2>
 
-                <!-- Swiftcomplete address lookup -->
-                <div class="ff has-icon" id="checkout-what3words-input">
-                    <input id="w3w-input" name="checkout_w3w_lookup" type="text" placeholder=" " autocomplete="off">
-                    <label for="w3w-input">Type your address, what3words, or postcode</label>
-                    <img class="ff-icon" src="/images/icons/search.svg" alt="">
-                </div>
+                <!-- Swiftcomplete address lookup (web component) -->
+                <swiftcomplete-search id="sc-address-search" name="checkout_w3w_lookup" theme="light"
+                                      placeholder="Type your address, what3words, or postcode"></swiftcomplete-search>
 
                 <!-- what3words address (populated when a w3w suggestion is selected) -->
                 <div class="ff" id="checkout-w3w-address-wrapper" style="display:none">
@@ -249,14 +246,8 @@
         </aside>
     </form>
 </main>
-<script>!function (e, t, c) {
-    e.swiftcomplete = e.swiftcomplete || {};
-    var s = t.createElement("script");
-    s.async = !0, s.src = c;
-    var r = t.getElementsByTagName("script")[0];
-    r.parentNode.insertBefore(s, r)
-}(window, document, "https://assets.swiftcomplete.com/js/swiftlookup.js");
-</script>
+<script type="module"
+        src="https://cdn.jsdelivr.net/npm/@swiftcomplete/component@1.1.0/dist/swiftcomplete.es.js"></script>
 <script type="text/javascript" src="/js/sc-app.js"></script>
 </body>
 
