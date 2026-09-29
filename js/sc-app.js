@@ -1,8 +1,14 @@
 const SWIFTCOMPLETE_API_KEY = "322d46ce-6eaa-4d57-8fdf-c39d5ccb54c0";
 const SWIFTCOMPLETE_SEARCH_ELEMENT_ID = "sc-address-search";
-// The component ships with debounce off (0), i.e. one request per keystroke —
-// which is what overflowed the API's per-key queue for Tile Mountain (TT-10697).
-const SWIFTCOMPLETE_DEBOUNCE_MS = 300;
+// Default debounce value
+const SWIFTCOMPLETE_DEBOUNCE_MS = 200;
+
+// The default value will remain, If not passed via query param (such as ?debounce=500)
+function debounceMs() {
+    const raw = new URLSearchParams(window.location.search).get('debounce');
+    const ms = Number(raw);
+    return raw && Number.isFinite(ms) && ms >= 0 ? ms : SWIFTCOMPLETE_DEBOUNCE_MS;
+}
 
 // Keys are ours; `format` is the Swiftcomplete line format, `fieldId` the input
 // the component writes that line into on selection.
@@ -46,9 +52,12 @@ function initSwiftcomplete() {
     const countrySelect = document.querySelector('select[name="country"]');
 
     window.swiftcomplete.runWhenReady(function (service) {
+        const debounce = debounceMs()
+        console.log("debounce:", debounce)
+
         service.setApiKey(SWIFTCOMPLETE_API_KEY);
         service.setSearchFor('what3words', 'address');
-        service.setDebounce(SWIFTCOMPLETE_DEBOUNCE_MS);
+        service.setDebounce(debounce);
         service.setEnableSearchOnEmptySearch(true);
         service.setCountry((countrySelect.value || 'GB').toLowerCase());
 
