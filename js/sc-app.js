@@ -1,14 +1,7 @@
 const SWIFTCOMPLETE_API_KEY = "322d46ce-6eaa-4d57-8fdf-c39d5ccb54c0";
 const SWIFTCOMPLETE_SEARCH_ELEMENT_ID = "sc-address-search";
-// Default debounce value
-const SWIFTCOMPLETE_DEBOUNCE_MS = 200;
-
-// The default value will remain, If not passed via query param (such as ?debounce=500)
-function debounceMs() {
-    const raw = new URLSearchParams(window.location.search).get('debounce');
-    const ms = Number(raw);
-    return raw && Number.isFinite(ms) && ms >= 0 ? ms : SWIFTCOMPLETE_DEBOUNCE_MS;
-}
+// Deliberately off: one request per keystroke.
+const SWIFTCOMPLETE_DEBOUNCE_MS = 0;
 
 // Keys are ours; `format` is the Swiftcomplete line format, `fieldId` the input
 // the component writes that line into on selection.
@@ -47,40 +40,14 @@ function clearAddressFields(search) {
     search.getInput().value = '';
 }
 
-// Floating debounce control panel
-function mountDebouncePanel(service) {
-    const panel = document.createElement('details');
-    panel.className = 'sc-debounce-panel';
-    panel.innerHTML =
-        '<summary>Debounce: <span></span> ms</summary>' +
-        '<label>Delay (ms) <input type="number" min="0" step="50"></label>';
-
-    const current = panel.querySelector('summary span');
-    const input = panel.querySelector('input');
-    current.textContent = input.value = service.debounce;
-
-    input.addEventListener('input', function () {
-        const ms = Number(input.value);
-        if (input.value === '' || !Number.isFinite(ms) || ms < 0) return;
-        service.setDebounce(ms);
-        current.textContent = ms;
-    });
-
-    document.body.appendChild(panel);
-}
-
 function initSwiftcomplete() {
     const search = document.getElementById(SWIFTCOMPLETE_SEARCH_ELEMENT_ID);
     const countrySelect = document.querySelector('select[name="country"]');
 
     window.swiftcomplete.runWhenReady(function (service) {
-        const debounce = debounceMs()
-        console.log("debounce:", debounce)
-
         service.setApiKey(SWIFTCOMPLETE_API_KEY);
         service.setSearchFor('what3words', 'address');
-        service.setDebounce(debounce);
-        mountDebouncePanel(service);
+        service.setDebounce(SWIFTCOMPLETE_DEBOUNCE_MS);
         service.setEnableSearchOnEmptySearch(true);
         service.setCountry((countrySelect.value || 'GB').toLowerCase());
 
