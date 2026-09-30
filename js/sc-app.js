@@ -1,4 +1,4 @@
-const SWIFTCOMPLETE_API_KEY = "97c5cd6e-b351-4066-b48c-dcde3b5bc97a";
+const SWIFTCOMPLETE_API_KEY = "322d46ce-6eaa-4d57-8fdf-c39d5ccb54c0";
 const SWIFTCOMPLETE_SEARCH_ELEMENT_ID = "sc-address-search";
 // Default debounce value
 const SWIFTCOMPLETE_DEBOUNCE_MS = 200;
