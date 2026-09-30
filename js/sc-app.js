@@ -1,4 +1,4 @@
-const SWIFTCOMPLETE_API_KEY = "322d46ce-6eaa-4d57-8fdf-c39d5ccb54c0";
+const SWIFTCOMPLETE_API_KEY = "97c5cd6e-b351-4066-b48c-dcde3b5bc97a";
 const SWIFTCOMPLETE_SEARCH_ELEMENT_ID = "sc-address-search";
 // Default debounce value
 const SWIFTCOMPLETE_DEBOUNCE_MS = 200;
@@ -47,6 +47,28 @@ function clearAddressFields(search) {
     search.getInput().value = '';
 }
 
+// Floating debounce control panel
+function mountDebouncePanel(service) {
+    const panel = document.createElement('details');
+    panel.className = 'sc-debounce-panel';
+    panel.innerHTML =
+        '<summary>Debounce: <span></span> ms</summary>' +
+        '<label>Delay (ms) <input type="number" min="0" step="50"></label>';
+
+    const current = panel.querySelector('summary span');
+    const input = panel.querySelector('input');
+    current.textContent = input.value = service.debounce;
+
+    input.addEventListener('input', function () {
+        const ms = Number(input.value);
+        if (input.value === '' || !Number.isFinite(ms) || ms < 0) return;
+        service.setDebounce(ms);
+        current.textContent = ms;
+    });
+
+    document.body.appendChild(panel);
+}
+
 function initSwiftcomplete() {
     const search = document.getElementById(SWIFTCOMPLETE_SEARCH_ELEMENT_ID);
     const countrySelect = document.querySelector('select[name="country"]');
@@ -58,6 +80,7 @@ function initSwiftcomplete() {
         service.setApiKey(SWIFTCOMPLETE_API_KEY);
         service.setSearchFor('what3words', 'address');
         service.setDebounce(debounce);
+        mountDebouncePanel(service);
         service.setEnableSearchOnEmptySearch(true);
         service.setCountry((countrySelect.value || 'GB').toLowerCase());
 

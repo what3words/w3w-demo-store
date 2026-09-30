@@ -314,3 +314,36 @@ swiftcomplete-search {
 
   &__currency { font-size: 12px; color: #6b7177; margin-right: 6px; }
 }
+
+/* ── Demo-only debounce control (see mountDebouncePanel in sc-app.js) ── */
+.sc-debounce-panel {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1000;
+  padding: 8px 12px;
+  background: #fff;
+  border: 1px solid #c9cccf;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+  font-size: 13px;
+  color: #1a1a1a;
+
+  > summary { cursor: pointer; }
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    min-height: 0; // global `label { min-height: 30px }` from _forms.scss
+  }
+
+  input {
+    width: 80px;
+    padding: 4px 6px;
+    border: 1px solid #c9cccf;
+    border-radius: 4px;
+    font: inherit;
+  }
+}
